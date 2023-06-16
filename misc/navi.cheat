@@ -1,0 +1,16 @@
+% navi
+
+# Open other navi cheatsheets
+navi fn welcome
+
+# Update navi cheatsheet repositories
+for f in $(navi info cheats-path)/*/; do \
+  folder_name=$(echo ${f} | awk -F'/' '{ print $(NF-1) }') \
+  && user=$(echo ${folder_name} | awk -F'__' '{ print $1 }') \
+  && repo=$(echo ${folder_name} | awk -F'__' '{ print $2 }') \
+  && echo "Updating ${user}/${repo}" \
+  && pushd "${f}" \
+  && git pull -q \
+  && popd; \
+done
+
