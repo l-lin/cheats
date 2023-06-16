@@ -1,5 +1,5 @@
-% bash, sd
-@ bash, common
+% shell, sd
+@ shell, common
 
 # Replace all occurrences
 sd <before> <after>
