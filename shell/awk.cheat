@@ -89,3 +89,5 @@ awk '
   print sum
 }'
 
+# Print last but one field
+awk '{ print $(NF-1) }'
