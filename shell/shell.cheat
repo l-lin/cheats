@@ -35,6 +35,13 @@ for i in *; do mv $i $(echo $i | tr '[:upper:]' '[:lower:]'); done
 # Find duplicate file based on MD5 hash
 find -type f -exec  md5sum '{}' ';' |  sort |  uniq --all-repeated=separate -w 33 |  cut -c 35-
 
+# Check if folder exist
+if [ -d ${<folder_name>} ]; then
+  echo "${<folder_name>} exists"
+else
+  echo "${<folder_name>} does not exist"
+fi
+
 # -----------------------------------------------------------------
 
 % shell, misc
