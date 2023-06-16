@@ -1,0 +1,72 @@
+% shell, common
+
+$ input_file: ls -p | grep -v /
+
+# -----------------------------------------------------------------
+
+% shell, ls, file
+
+# File system structure explanation
+man hier
+
+# List files sorted by modification date
+ls -lt
+
+# List all files, without current and parent directories
+ls -A
+
+# List files sorted by size
+ls -l -S
+
+% shell, tree
+
+# List only directory in tree-like format
+tree -d
+
+# List files in tree-like format with display depth
+tree -L <display_depth>
+
+# Get folder Names
+for f in */; do echo $f; done
+
+# Rename files to lower case
+for i in *; do mv $i $(echo $i | tr '[:upper:]' '[:lower:]'); done
+
+# Find duplicate file based on MD5 hash
+find -type f -exec  md5sum '{}' ';' |  sort |  uniq --all-repeated=separate -w 33 |  cut -c 35-
+
+# -----------------------------------------------------------------
+
+% shell, misc
+
+# Change capslock to ctrl
+setxkbmap -layout us -option ctrl:nocaps -variant altgr-intl
+
+# Create a fake file with a certain size (example for file size: 5K)
+fallocate -l <size> <output_file>
+
+# -----------------------------------------------------------------
+
+% shell, misc
+
+# Information about CPU
+lscpu
+
+# Display calendar
+cal
+
+# Bandwidth usage
+iftop
+
+# Network interfaces
+lspci | egrep -i 'network|ethernet'
+
+# Info about kernel release
+uname -a
+
+# System hardware information
+sudo lshw
+
+# System hardware information in HTML format
+sudo lshw -html
+

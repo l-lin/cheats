@@ -1,0 +1,7 @@
+% shell, grep
+
+# Extract specific text
+grep -o '<prefix>\(.*\)<suffix>' <file> | sed 's/<prefix>\(.*\)<suffix>/\1/'
+
+# Find all lines that do not contain filter
+grep -v <filter> <input_file>

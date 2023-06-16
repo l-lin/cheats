@@ -1,0 +1,8 @@
+% shell, date
+
+# Convert epoch timestamp to human readable
+date -u --date=@$((<timestamp_in_milli>/1000)).$((<timestamp_in_milli>%1000)) "+%Y-%m-%dT%H:%M:%S.%3NZ"
+
+# Convert human readable to epoch timestamp in second
+date -d '<timestamp_in_iso_8601>' +%s%3N
+

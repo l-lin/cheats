@@ -1,0 +1,15 @@
+% bash, sd
+@ bash, common
+
+# Replace all occurrences
+sd <before> <after>
+
+# Replace newlines
+sd '\n' '<target_character>'
+
+# Search and replace with regex and indexed capture groups
+sd '<regex>' '$1'
+
+# Preview change
+sd -p '<before>' '<after>' <input_file>
+

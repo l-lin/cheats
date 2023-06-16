@@ -1,0 +1,6 @@
+% shell, sed
+@ shell, common
+
+# Convert to camel case
+sed -e 's/\(.*\)/\L\1/' <input_file>
+

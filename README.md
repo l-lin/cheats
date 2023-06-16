@@ -1,2 +1,3 @@
 # cheats
-Cheatsheets for navi
+
+Cheatsheets for [navi](https://github.com/denisidoro/navi).

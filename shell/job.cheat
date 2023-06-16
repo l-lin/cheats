@@ -1,0 +1,17 @@
+% job
+
+# List current jobs
+jobs
+
+# Create a job in the background
+<cmd> &
+
+# Bring the last job to the foreground
+fg %1
+
+# Bring a job back to the background
+bg %1
+
+# Disowning background job (allow process to continue once the shell session is closed)
+disown %1
+
