@@ -1,0 +1,16 @@
+% nvim
+
+# Display NVIM base directory documentation
+:h base-directories
+
+# Display config directory
+:echo stdpath("config")
+
+# Display data directory
+:echo stdpath("data")
+
+# Display run directory
+:echo stdpath("run")
+
+# Display state directory
+:echo stdpath("state")
