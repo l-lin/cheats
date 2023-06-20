@@ -6,3 +6,5 @@ date -u --date=@$((<timestamp_in_milli>/1000)).$((<timestamp_in_milli>%1000)) "+
 # Convert human readable to epoch timestamp in second
 date -d '<timestamp_in_iso_8601>' +%s%3N
 
+$ timestamp_in_milli: echo -e "$(xclip -o -sel clip)\n"
+$ timestamp_in_iso_8601: echo -e "$(xclip -o -sel clip)\n"
