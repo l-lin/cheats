@@ -12,6 +12,9 @@ awk '{ print $<index_1>,$<index_2> }'
 # Print elements and concat with commas
 awk '{ print $<index_1> "," $<index_2> }'
 
+# Print all elements except first element
+awk '{ for (i=1; i <=NF; i++) print $i }'
+
 # Print number of row
 awk '{ print NR " " $<index> }'
 
