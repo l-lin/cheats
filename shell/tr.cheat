@@ -1,0 +1,7 @@
+% shell, tr
+
+# Convert newlines into space
+tr '\n' ' '
+
+# Convert space into newlines
+tr ' ' '\n'
