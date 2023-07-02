@@ -1,0 +1,11 @@
+% terraform
+
+# Show tfplan summary in table format
+tf-summarize -tree <tfplan_file>
+
+# Apply terraform resource
+terraform apply -var-file=<var_file> -target=<resource>
+
+$ tfplan_file: ls -p *
+$ resource: grep '^resource' *.tf | tr -d '"' | awk '{ print $2 "." $3 }'
+
