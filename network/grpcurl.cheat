@@ -1,0 +1,11 @@
+% grpcurl, grpc
+
+# Invoking gRPC
+grpcurl <host>:<port> <package>/<method>
+
+# Invoking gRPC without TLS
+grpcurl -plaintext <host>:<port> <package>/<method>
+
+# Invoking gRPC with body
+grpcurl -d '<request_body>' <host>:<port> <package>/<method>
+
