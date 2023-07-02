@@ -1,0 +1,5 @@
+% websocat, ws, websocket
+
+# Connect to websocket server
+websocat ws://<domain>
+
