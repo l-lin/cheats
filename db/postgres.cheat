@@ -3,6 +3,9 @@
 # Open Postgres interactive shell
 pgcli -h <host> -p 5432 -U <user> <db>
 
+# Check last value of a sequence
+SELECT LAST_VALUE FROM <sequence_name>
+
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
 $ db: cat ${HOME}/.pgpass | awk -F':' '{ print $3 }' | sort | uniq
