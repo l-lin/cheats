@@ -4,7 +4,10 @@
 pgcli -h <host> -p 5432 -U <user> <db>
 
 # Check last value of a sequence
-SELECT LAST_VALUE FROM <sequence_name>
+SELECT LAST_VALUE FROM <sequence_name>;
+
+# Set sequence value
+SELECT setval('<sequence_name>', <sequence_new_value>, true);
 
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
