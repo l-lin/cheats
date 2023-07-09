@@ -96,6 +96,15 @@ ffmpeg -i <input_file> \
   -f mp4 \
   <output_file>
 
+# Add text to center of video
+ffmpeg -i <input_file> \
+  -vf "drawtext=text='<message>':fontsize=<font_size>:x=(w-tw)/2:y=(h-th)/2:fontcolor=<font_color>" \
+  -f mp4 \
+  <output_file>
+
+$ font_size: echo -e '25\n'
+$ font_color: echo -e 'black\nwhite\n'
+
 % video, vlc
 @ video, common
 
