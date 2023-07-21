@@ -1,0 +1,11 @@
+% miller, csv
+
+# Generate stats from CSV file
+mlr --icsv \
+  --oxtab \
+  --from <input_csv> \
+  stats1 \
+  -a count,min,mean,max,p95 \
+  -f <field_name>
+
+$ input_csv: ls -p *.csv

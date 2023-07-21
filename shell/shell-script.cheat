@@ -11,6 +11,9 @@ err() {
 # Generate random number
 echo $((1 + RANDOM % 10))
 
+# Pause script until keypress
+read -r -p '<message>' </dev/tty
+
 # -----------------------------------------------------------------
 
 % shell, script, string manipulation
