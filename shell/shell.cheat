@@ -18,6 +18,9 @@ ls -A
 # List files sorted by size
 ls -l -S
 
+# List current child directories
+ls -d */
+
 % shell, tree
 
 # List only directory in tree-like format
