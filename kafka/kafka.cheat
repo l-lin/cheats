@@ -1,0 +1,12 @@
+% kafka
+
+# Create web UI to manage Kafka cluster
+docker run -it --rm --name kafka-console \
+  --network=<docker_network> \
+  -p <host_port>:8080 \
+  -e KAFKA_BROKERS=<kafka_brokers> \
+  docker.redpanda.com/redpandadata/console:latest
+
+$ docker_network: docker network ls --- --column 2 --header-lines 1 --delimiter '\s\s+'
+$ host_port: echo -e '8080\n4000\n4200\n9090\n'
+$ kafka_brokers: echo -e 'localhost:9092\n'
