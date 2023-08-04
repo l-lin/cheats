@@ -14,3 +14,6 @@ for f in $(navi info cheats-path)/*/; do \
   && popd; \
 done
 
+# Search in cheat.sh
+navi --cheatsh <query>
+
