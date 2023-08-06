@@ -1,4 +1,9 @@
 % cargo
 
 # Force update crate
-cargo install --force <crate>
+cargo install --force <installed_crate>
+
+# Update all crates
+cargo install-update -a
+
+$ installed_crate: cat "${HOME}/.default-cargo-crates"
