@@ -17,3 +17,6 @@ done
 # Search in cheat.sh
 navi --cheatsh <query>
 
+# Use .cheat files from current path
+navi -p .
+
