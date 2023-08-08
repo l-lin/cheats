@@ -4,7 +4,7 @@
 git rebase -i "HEAD~$(git cherry -v <target_branch> $(git rev-parse --abbrev-ref HEAD) | wc -l)"
 
 # Create new git branch from current HEAD
-git checkout -b <branch_type>/CLOUD-<jira_id>/<branch_name>
+git checkout -b <branch_type>/<jira_id>/<branch_name>
 
 # Git commit with conventional commit syntax
 git add -A && git commit -m "<commit_type>($(git rev-parse --abbrev-ref HEAD | awk -F'/' '{ print $2 }')): <git_msg>"
@@ -37,4 +37,4 @@ $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ branch_type: echo -e 'feature\nbugfix\ntask\nrefactor'
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ file_path: find . -type f -not -path './.git/*' -not -path './target/*' -not -path './node_modules/*'
-
+$ jira_id: echo -e "$(xclip -o -sel clip)\n"
