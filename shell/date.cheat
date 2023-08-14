@@ -12,5 +12,9 @@ date -u "+%Y-%m-%dT%H:%M:%S.%3NZ"
 # Get current timestamp in second from epoch timestamp
 date +%s%3N
 
+# Get duration in second to human readable
+duration_in_sec=<duration_in_sec> && date -ud "@${duration_in_sec}" +"$(( ${duration_in_sec}/3600/24 ))d %Hh %Mm %Ss"
+
 $ timestamp_in_milli: echo -e "$(xclip -o -sel clip)\n"
 $ timestamp_in_iso_8601: echo -e "$(xclip -o -sel clip)\n"
+$ duration_in_sec: echo -e "$(xclip -o -sel clip)\n"
