@@ -9,6 +9,22 @@ SELECT LAST_VALUE FROM <sequence_name>;
 # Set sequence value
 SELECT setval('<sequence_name>', <sequence_new_value>, true);
 
+# Generate random values
+WITH r AS (
+  SELECT idx, FLOOR((RANDOM() * 4)) AS x
+  FROM GENERATE_SERIES(1, 10000000) AS idx
+)
+INSERT INTO acquisition
+   SELECT
+     r.idx,
+     CASE r.x
+       WHEN 0 THEN 'foo'
+       WHEN 1 THEN 'bar'
+       WHEN 2 THEN 'popo'
+       WHEN 3 THEN 'toto'
+     END || r.idx
+   FROM r
+
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
 $ db: cat ${HOME}/.pgpass | awk -F':' '{ print $3 }' | sort | uniq
