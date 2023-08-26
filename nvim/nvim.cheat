@@ -17,3 +17,21 @@
 
 # Get filetype
 :set filetype?
+
+# Add border to LSP windows (hover + signatureHelp)
+local function set_border_on_lsp()
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = vim.g.border_style,
+  })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = vim.g.border_style,
+  })
+
+  vim.diagnostic.config({
+    float = { border = vim.g.border_style },
+  })
+end
+
+set_border_on_lsp()
+
