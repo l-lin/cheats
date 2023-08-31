@@ -25,6 +25,15 @@ INSERT INTO acquisition
      END || r.idx
    FROM r
 
+# Export output to CSV
+\COPY (SELECT * FROM foobar WHERE start_time > '2023-01-01') TO '/output.csv' CSV HEADER;
+
+# Create temporary table
+CREATE TEMPORARY TABLE foobar (
+  id text,
+  start_time timestamp
+);
+
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
 $ db: cat ${HOME}/.pgpass | awk -F':' '{ print $3 }' | sort | uniq
