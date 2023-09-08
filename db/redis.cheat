@@ -1,0 +1,24 @@
+% redis
+
+# Start local redis
+docker run -it --rm --name redis -p <published_port>:6379 redis
+
+# Open redis cli
+docker run -it --rm --network host redis redis-cli -h <target_host>
+
+$ published_port: echo -e '6379\n'
+$ target_host: echo -e 'localhost\n'
+
+% redis, acl
+; commands to use in redis-cli REPL
+; https://redis.io/docs/management/security/acl/
+
+# Create and edit redis user ACLs
+ACL SETUSER <username> <status> ><password> <allowed_keys> <permissions>
+
+# Authentication with redis user
+AUTH <username> <password>
+
+$ status: echo -e 'on\noff'
+$ allowed_keys: echo -e '~*\n'
+$ permissions: echo -e '-@all +get +set +ttl +keys\n'
