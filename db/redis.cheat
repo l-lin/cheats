@@ -22,3 +22,14 @@ AUTH <username> <password>
 $ status: echo -e 'on\noff'
 $ allowed_keys: echo -e '~*\n'
 $ permissions: echo -e '-@all +get +set +ttl +keys\n'
+
+% redis, scan
+; commands to use in redis-cli REPL
+; https://redis.io/docs/manual/keyspace/#scan
+
+# Get keys by pattern
+SCAN <cursor> MATCH <pattern> COUNT <count>
+
+$ cursor: echo -e '0\n'
+$ pattern: echo -e '*\n'
+$ count: echo -e '10\n'
