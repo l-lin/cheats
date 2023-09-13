@@ -35,3 +35,11 @@ end
 
 set_border_on_lsp()
 
+# Save all files
+:wa
+
+# Save and exit all
+:xa
+
+# Quit all
+:qa
