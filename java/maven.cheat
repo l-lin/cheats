@@ -6,3 +6,4 @@ mvn versions:display-dependency-updates | rg '\->'
 # Change maven project version
 mvn versions:set -DgenerateBackupPoms=false -DnewVersion=<version>
 
+$ version: echo -e "$(xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v '/x:project/x:version' pom.xml)\n"
