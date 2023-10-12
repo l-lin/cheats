@@ -5,3 +5,6 @@ tr '\n' ' '
 
 # Convert space into newlines
 tr ' ' '\n'
+
+# Delete newline
+tr -d '\n'
