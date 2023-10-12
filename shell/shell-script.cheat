@@ -190,3 +190,6 @@ done
 # Convert String to array
 mapfile -t array < <(mycommand)
 
+# Ternary condition
+a=$([ "$b" == 5 ] && echo "$c" || echo "$d")
+
