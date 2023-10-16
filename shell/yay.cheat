@@ -21,3 +21,9 @@ yay -Yc
 # Show statistics for installed packages and system health
 yay -Ps
 
+# Check package version
+yay -Q
+
+# Downgrade package
+sudo downgrade '<package_name>=<version>'
+
