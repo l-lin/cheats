@@ -1,0 +1,11 @@
+% java
+
+# Count duplicate using Stream API
+items.stream()
+     .map(Item::getId)
+     .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+     .values()
+     .stream()
+     .filter(x -> x > 1)
+     .count();
+
