@@ -37,3 +37,19 @@ CREATE TEMPORARY TABLE foobar (
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
 $ db: cat ${HOME}/.pgpass | awk -F':' '{ print $3 }' | sort | uniq
+
+% postgres, local
+
+# Start local postgresql
+docker run -it -d --rm \
+  --name postgres \
+  -e POSTGRES_USER=<user> \
+  -e POSTGRES_PASSWORD=<password> \
+  -e POSTGRES_DB=<db> \
+  -p <published_port>:5432 \
+  postgres:12.7-alpine
+
+$ published_port: echo -e '5432\n'
+$ user: echo -e 'postgres\n'
+$ password: echo -e 'postgres\n'
+$ db: echo -e 'db\n'
