@@ -6,14 +6,32 @@
 # Display config directory
 :echo stdpath("config")
 
+# Display config directory in Lua
+:lua print(vim.fn.stdpath("config"))
+
 # Display data directory
 :echo stdpath("data")
+
+# Display data directory in La
+:lua print(vim.fn.stdpath("data"))
 
 # Display run directory
 :echo stdpath("run")
 
+# Display run directory in Lua
+:lua print(vim.fn.stdpath("run"))
+
 # Display state directory
 :echo stdpath("state")
+
+# Display state directory in Lua
+:lua print(vim.fn.stdpath("state"))
+
+# Display state directory
+:echo stdpath("cache")
+
+# Display state directory in Lua
+:lua print(vim.fn.stdpath("cache"))
 
 # Get filetype
 :set filetype?
@@ -43,3 +61,7 @@ set_border_on_lsp()
 
 # Quit all
 :qa
+
+# Debug variable
+:lua vim.inspect(<variable>)
+
