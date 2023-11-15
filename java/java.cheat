@@ -9,3 +9,23 @@ items.stream()
      .filter(x -> x > 1)
      .count();
 
+# Read file line by line with Scanner
+try (var scanner = new Scanner(new File("filename.txt"))) {
+    while (scanner.hasNextLine()) {
+        String nextLine = scanner.nextLine();
+    }
+}
+
+# Delete folder
+private static void deleteFolder(Path path) {
+    try (Stream<Path> walk = Files.walk(path)) {
+        // sort in reverse so the directory itself comes after its child files
+        for (Path child : walk.sorted(Comparator.reverseOrder()).toList()) {
+            if (Files.deleteIfExists(child)) {
+                LOGGER.debug("'{}' deleted", child);
+            }
+        }
+    } catch (IOException e) {
+        throw new UncheckedIOException("Failed to delete build folder", e);
+    }
+}
