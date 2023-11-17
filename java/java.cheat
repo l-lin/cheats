@@ -29,3 +29,75 @@ private static void deleteFolder(Path path) {
         throw new UncheckedIOException("Failed to delete build folder", e);
     }
 }
+
+# Kafka consumer
+@Slf4j
+@RequiredArgsConstructor
+public class KafkaMessageProcessor implements Runnable, AutoCloseable {
+
+    private final List<String> topics;
+    private final Duration pollDuration;
+    private final KafkaConsumer<String, String> kafkaConsumer;
+    private final Consumer<String> processMessage;
+
+    private AtomicBoolean shutdown = new AtomicBoolean();
+    private CountDownLatch shutdownLatch = new CountDownLatch(1);
+
+    public static void main(String[] args) throws InterruptedException {
+        var consumerProperties = new Properties();
+        consumerProperties.put(CommonClientConfigs.BOOTSTRAP_SERVERS_CONFIG, "localhost:9092");
+        consumerProperties.put(ConsumerConfig.GROUP_ID_CONFIG, "test");
+        consumerProperties.put(ConsumerConfig.AUTO_OFFSET_RESET_CONFIG, "earliest");
+        consumerProperties.put(ConsumerConfig.ENABLE_AUTO_COMMIT_CONFIG, "false");
+        List<String> consumedMessages = new ArrayList<>();
+
+        try (var kafkaMessageProcessor = new KafkaLiveStreamProcessor(
+                List.of("topic"),
+                Duration.ofMillis(100),
+                new KafkaConsumer<>(consumerProperties, new StringDeserializer(), new StringDeserializer()),
+                consumedMessages::add
+        )) {
+            CompletableFuture.runAsync(kafkaMessageProcessor);
+            Thread.sleep(1000);
+        }
+    }
+
+    @Override
+    public void run() {
+        kafkaConsumer.subscribe(topics);
+
+        try {
+            process();
+        } finally {
+            // Closing the kafka consumer here because the consumer is not thread-safe, so we need to ensure the kafka
+            // consumer is closed using the same thread.
+            kafkaConsumer.close();
+            LOGGER.info("Kafka consumer closed");
+            shutdownLatch.countDown();
+        }
+    }
+
+    @Override
+    public void close() {
+        shutdown.set(true);
+        try {
+            shutdownLatch.await();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOGGER.error("Thread was interrupted while waiting for the shutdown latch", e);
+        }
+    }
+
+    private void process() {
+        while (!shutdown.get()) {
+            pollMessages().forEach(processMessage::accept);
+            kafkaConsumer.commitAsync();
+        }
+    }
+
+    private Stream<String> pollMessages() {
+        ConsumerRecords<String, String> messages = kafkaConsumer.poll(pollDuration);
+        return StreamSupport.stream(messages.spliterator(), false)
+                .map(ConsumerRecord::value);
+    }
+}
