@@ -102,6 +102,9 @@ ffmpeg -i <input_file> \
   -f mp4 \
   <output_file>
 
+# Create video file with multi-colors bars
+ffmpeg -f lavfi -i smptebars -t <duration_in_second> <output_file>
+
 $ font_size: echo -e '25\n'
 $ font_color: echo -e 'black\nwhite\n'
 
