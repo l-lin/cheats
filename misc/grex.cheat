@@ -1,5 +1,5 @@
 % grex
 
 # Create regex from expected
-grep <input>
+grex <input>
 
