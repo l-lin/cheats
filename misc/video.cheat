@@ -45,7 +45,7 @@ ffmpeg -i <input_file> \
   <output_file>
 
 # Stream video indefinitely to a source
-ffmpeg -re -stream_loop 1 -i <input_file> -f flv <scheme>://<url>
+ffmpeg -re -stream_loop 1 -i <input_file> -vcodec copy -acodec copy -f flv <scheme>://<url>
 
 # Stream clock to a source
 ffmpeg -stream_loop 1 -f lavfi -re \

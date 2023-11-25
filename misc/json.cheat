@@ -1,9 +1,15 @@
 % json
 
-# View json interatively
+# View json interatively with jless
+; https://github.com/PaulJuliusMartinez/jless
 jless <input_file>
 
+# View json interatively with fx
+; https://github.com/antonmedv/fx
+fx <input_file>
+
 # Create json object
+; https://github.com/jpmens/jo
 jo -p name=JP object=$(jo fruit=Orange hungry@0 point=$(jo x=10 y=20 list=$(jo -a 1 2 3 4 5)) number=17) sunday@1
 
 $ input_file: find . -name "*.json"

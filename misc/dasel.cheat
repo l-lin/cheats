@@ -1,6 +1,7 @@
 % dasel
 
 # Convert file to another format
+; https://github.com/TomWright/dasel
 dasel -r <input_format> -w <output_format> -f <input_file>
 
 $ input_format: echo -e 'json\nyaml\ncsv\ntoml'
