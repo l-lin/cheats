@@ -193,3 +193,23 @@ mapfile -t array < <(mycommand)
 # Ternary operator
 a=$([ "$b" == 5 ] && echo "$c" || echo "$d")
 
+# -----------------------------------------------------------------
+
+% shell, script, logging
+
+# Pretty logging
+green='\e[0;32m'
+orange='\e[0;33m'
+red='\e[0;31m'
+escape='\e[0m'
+
+info() {
+  echo -e "${green}INF ${escape} ${1}"
+}
+warn() {
+  >&2 echo -e "${orange}WAR ${escape} ${1}"
+}
+error() {
+  >&2 echo -e "${red}ERR ${escape} ${1}"
+}
+
