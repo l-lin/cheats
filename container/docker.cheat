@@ -7,3 +7,34 @@ docker images -q | xargs -I% docker rmi "%" --force
 docker exec -it <container_id> bash
 
 $ container_id: docker ps --- --headers 1 --column 1 --delimiter '\s\s+'
+
+% docker, dockerfile
+
+# Add user/group in Alpine image
+FROM alpine
+
+ARG UID=1000
+ARG GID=1000
+ARG USER=app
+ARG GROUP=app
+
+RUN addgroup -S ${GROUP} -g ${GID} \
+    && adduser -S ${USER} -G ${GROUP} -u ${UID}
+
+USER ${USER}:${GROUP}
+WORKDIR /home/${USER}
+
+# Add user/group in Debian image
+FROM debian
+
+ARG UID=1000
+ARG GID=1000
+ARG USER=app
+ARG GROUP=app
+
+RUN groupadd -g ${GID} ${GROUP} \
+    && useradd -g ${GROUP} -u ${UID} -l ${USER}
+
+USER ${USER}:${GROUP}
+WORKDIR /home/${USER}
+
