@@ -1,0 +1,5 @@
+% shell, misc
+
+# Generate random UUID
+uuidgen | tr -d '\r\n'
+
