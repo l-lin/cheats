@@ -221,6 +221,15 @@ error() {
 set -euo pipefail
 
 foo=${FOO:-foo}
+
+greet_user() {
+  local name="${1}"
+  if [[ -z "${name}" ]]; then
+    read -p "person to greet: " -r name
+  fi
+  echo "Hello, ${name}"
+}
+
 show_help() {
   cat << EOF
 Script description here
@@ -251,14 +260,6 @@ Environment variables:
     FOO                   Some environment variable to set
 
 EOF
-}
-
-greet_user() {
-  local name="${1}"
-  if [[ -z "${name}" ]]; then
-    read -p "person to greet: " -r name
-  fi
-  echo "Hello, ${name}"
 }
 
 main() {
