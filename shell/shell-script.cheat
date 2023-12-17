@@ -14,6 +14,11 @@ echo $((1 + RANDOM % 10))
 # Pause script until keypress
 read -r -p '<message>' </dev/tty
 
+# Check if process is running (returns 1 if there's a running process, 0 otherwise)
+check_process() {
+  pgrep -nc "${1}"
+}
+
 # -----------------------------------------------------------------
 
 % shell, script, string manipulation
