@@ -1,0 +1,9 @@
+% pacman
+
+# Check old package versions installed locally
+ls /var/cache/pacman/pkg/*.pkg.tar.zst
+
+# Rollback package to a previous version locally installed.
+pacman -U <package_file>
+
+$ package_file: ls /var/cache/pacman/pkg/*.pkg.tar.zst
