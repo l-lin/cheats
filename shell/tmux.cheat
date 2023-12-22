@@ -1,0 +1,8 @@
+% tmux
+
+# Kill all tmux sessions except current
+tmux kill-session -a
+
+# Kill all tmux windows except current
+tmux kill-window -a
+
