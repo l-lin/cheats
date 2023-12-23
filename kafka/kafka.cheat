@@ -10,3 +10,80 @@ docker run -it --rm --name kafka-console \
 $ docker_network: docker network ls --- --column 2 --header-lines 1 --delimiter '\s\s+'
 $ host_port: echo -e '8080\n4000\n4200\n9090\n'
 $ kafka_brokers: echo -e 'localhost:9092\n'
+
+% kafka, java
+
+# Kafka consumer implementation example
+@Slf4j
+@RequiredArgsConstructor
+public class KafkaMessageProcessor implements Runnable, AutoCloseable {
+
+    private final List<String> topics;
+    private final Duration pollDuration;
+    private final KafkaConsumer<Key, Value> kafkaConsumer;
+    private final Consumer<Value> process;
+    // simple bean that calls System.exit(1) to terminate the application
+    private final ApplicationTerminator applicationTerminator;
+
+    private AtomicBoolean shutdown = new AtomicBoolean();
+    private CountDownLatch shutdownLatch = new CountDownLatch(1);
+
+    @Override
+    public void run() {
+        kafkaConsumer.subscribe(topics);
+
+        try {
+            process();
+        } finally {
+            // Closing the kafka consumer here because the consumer is not thread-safe, so we need to ensure the kafka
+            // consumer is closed using the same thread.
+            kafkaConsumer.close();
+            LOGGER.info("Kafka consumer closed");
+            shutdownLatch.countDown();
+        }
+    }
+
+    @Override
+    public void close() {
+        shutdown.set(true);
+        try {
+            shutdownLatch.await();
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+            LOGGER.error("Thread was interrupted while waiting for the shutdown latch", e);
+        }
+    }
+
+    private void process() {
+        while (!shutdown.get()) {
+            try {
+                poll().forEach(process::accept);
+                acknowledge();
+            } catch (Exception e) {
+                // We must call termination in async because it will block the thread until full termination, but we
+                // need to go out of the loop in order to close the kafka consumer and count down the latch, otherwise
+                // we will fall down to a deadlock.
+                CompletableFuture.runAsync(applicationTerminator::terminate);
+                break;
+            }
+        }
+    }
+
+    private Stream<Value> poll() {
+        try {
+            ConsumerRecords<Key, Value> messages = kafkaConsumer.poll(pollDuration);
+            return StreamSupport.stream(messages.spliterator(), false)
+                    .map(ConsumerRecord::value);
+        } catch (InvalidOffsetException e) {
+            throw new IllegalStateException("Could not poll kafka messages: " + e.getMessage(), e);
+        }
+    }
+
+    private void acknowledge() {
+        try {
+            kafkaConsumer.commitSync();
+        } catch (CommitFailedException | TimeoutException e) {
+            throw new IllegalStateException("Could not commit kafka messages: " + e.getMessage(), e);
+        }
+    }
+}
