@@ -3,3 +3,12 @@
 # Generate random UUID
 uuidgen | tr -d '\r\n'
 
+# Show Wifi
+nmcli device wifi
+
+# Show connected Wifi with password & QR code
+nmcli device wifi show-password
+
+# Get word definition
+sdcv <word>
+
