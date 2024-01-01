@@ -12,3 +12,12 @@ nmcli device wifi show-password
 # Get word definition
 sdcv <word>
 
+# Get word translation
+w3m 'www.linguee.com/english-french/search?source=auto&query=<word>'
+
+# Replace word in text (add -w to execute)
+rg <word_to_replace> -n | rep <word_to_replace> <word_to_replace_with>
+
+# Rename files
+fd <filename> | ren <filename> <new_filename>
+
