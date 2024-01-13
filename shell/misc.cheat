@@ -15,8 +15,12 @@ sdcv <word>
 # Get word translation
 w3m 'www.linguee.com/english-french/search?source=auto&query=<word>'
 
+% shell, misc, rep
+
 # Replace word in text (add -w to execute)
-rg <word_to_replace> -n | rep <word_to_replace> <word_to_replace_with>
+rg '<word_to_replace>' -n | rep '<word_to_replace>' '<word_to_replace_with>'
+
+% shell, misc, ren
 
 # Rename files
 fd <filename> | ren <filename> <new_filename>
