@@ -1,0 +1,8 @@
+% fish, fisher
+
+# Install / upadte fish plugins
+fisher update
+
+# Check fish function
+functions <function_name>
+
