@@ -15,6 +15,12 @@ sdcv <word>
 # Get word translation
 w3m 'www.linguee.com/english-french/search?source=auto&query=<word>'
 
+# Kill a process on a given port (https://github.com/vincentjames501/fish-kill-on-port)
+kill-on-port --port <port>
+
+# List processes that use the given port
+kill-on-port --port <port> --list
+
 % shell, misc, rep
 
 # Replace word in text (add -w to execute)
