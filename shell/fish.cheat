@@ -6,3 +6,27 @@ fisher update
 # Check fish function
 functions <function_name>
 
+% fish, script, string manipulation
+
+# Replace first match pattern in String
+string replace '<pattern>' '<replacement>' '<string>'
+
+# Split String by pattern
+string split '<pattern>' '<string>'
+
+# Pad strings to a given width
+string pad -c -x -w <width> '<string>'
+
+# Make string lower case
+string lower '<string>'
+
+# Make string upper case
+string upper '<string>'
+
+% fish, loop
+
+# Loop numerical
+for i in $(seq <start> <end>)
+  echo $i
+end
+
