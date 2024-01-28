@@ -1,4 +1,4 @@
-% shell, script
+% bash, script
 
 # Print error messages to stderr
 <cmd> || echo 'cmd failed' >/dev/stderr
@@ -21,7 +21,7 @@ check_process() {
 
 # -----------------------------------------------------------------
 
-% shell, script, string manipulation
+% bash, script, string manipulation
 
 # Replace first match pattern in String
 echo "${<variable>/<pattern>/<replacement>}"
@@ -58,7 +58,7 @@ echo "${<variable>##*<pattern>}"
 
 # -----------------------------------------------------------------
 
-% shell, script, array
+% bash, script, array
 
 # Create an array
 array=('first element' 'second element')
@@ -107,7 +107,7 @@ unset array
 
 # -----------------------------------------------------------------
 
-% shell, script, map
+% bash, script, map
 
 # Declare map
 declare -A map=([john]=75 [doe]=82 [ann]=83 [ava]=72)
@@ -128,7 +128,7 @@ unset "map[${i}]"
 
 # -----------------------------------------------------------------
 
-% shell, script, loop
+% bash, script, loop
 
 # Loop numerical
 for i in {<start>..<end>..<step>}; do
@@ -200,7 +200,7 @@ a=$([ "$b" == 5 ] && echo "$c" || echo "$d")
 
 # -----------------------------------------------------------------
 
-% shell, script, logging
+% bash, script, logging
 
 # Pretty logging
 green='\e[0;32m'
@@ -220,7 +220,7 @@ error() {
 
 # -----------------------------------------------------------------
 
-% shell, script, template
+% bash, script, template
 
 # Bash script template
 set -euo pipefail
