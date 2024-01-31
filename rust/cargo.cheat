@@ -6,4 +6,10 @@ cargo install --force <installed_crate>
 # Update all crates
 cargo install-update -a
 
+# List all installed crates
+cargo install --list
+
+# Uninstall crate
+cargo uninstall <installed_crate>
+
 $ installed_crate: cat "${HOME}/.default-cargo-crates"
