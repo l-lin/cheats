@@ -31,3 +31,6 @@ rg '<word_to_replace>' -n | rep '<word_to_replace>' '<word_to_replace_with>'
 # Rename files
 fd <filename> | ren <filename> <new_filename>
 
+# Evaluate simple mathematic expression
+echo '<math_expression>' | bc
+
