@@ -30,6 +30,13 @@ private static void deleteFolder(Path path) {
     }
 }
 
+# Check which Garbage collector is used
+; https://stackoverflow.com/a/5175321/3612053
+List<GarbageCollectorMXBean> l = ManagementFactory.getGarbageCollectorMXBeans();
+for(GarbageCollectorMXBean b : l) {
+    System.out.println(b.getName());
+}
+
 # Kafka consumer
 @Slf4j
 @RequiredArgsConstructor
