@@ -1,7 +1,7 @@
 % maven
 
 # Check maven dependency updates
-mvn versions:display-dependency-updates | rg '\->'
+mvn versions:display-property-updates | grep '\->'
 
 # Change maven project version
 mvn versions:set -DgenerateBackupPoms=false -DnewVersion=<version>
