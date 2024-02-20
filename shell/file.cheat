@@ -1,0 +1,7 @@
+% shell, file
+
+# Get filename from path
+file_path=<file_path> && echo ${file_path##*/}
+
+# Get filename without extension
+file_path=<file_path> && echo ${file_path%.*}
