@@ -34,3 +34,6 @@ fd <filename> | ren <filename> <new_filename>
 # Evaluate simple mathematic expression
 echo '<math_expression>' | bc
 
+# Sum number from input
+cat <filename> | paste -sd+ | bc
+
