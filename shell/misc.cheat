@@ -21,6 +21,9 @@ kill-on-port --port <port>
 # List processes that use the given port
 kill-on-port --port <port> --list
 
+# Trim whitespace
+echo '<text>' | xargs
+
 % shell, misc, rep
 
 # Replace word in text (add -w to execute)
