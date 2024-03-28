@@ -37,6 +37,9 @@ CREATE TEMPORARY TABLE foobar (
 # Get table size
 SELECT pg_size_pretty(pg_total_relation_size('<table_name>'));
 
+# Get database size
+SELECT pg_size_pretty(pg_database_size('<database_name>'));
+
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
 $ db: cat ${HOME}/.pgpass | awk -F':' '{ print $3 }' | sort | uniq
