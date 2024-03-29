@@ -6,4 +6,13 @@ mvn versions:display-property-updates | grep '\->'
 # Change maven project version
 mvn versions:set -DgenerateBackupPoms=false -DnewVersion=<version>
 
+# Create new maven project
+mvn archetype:generate \
+  -DgroupId=<group> \
+  -DartifactId=<name> \
+  -Dversion=<version> \
+  -DarchetypeArtifactId=maven-archetype-quickstart \
+  -DarchetypeVersion=1.4 \
+  -DinteractiveMode=false
+
 $ version: echo -e "$(xmlstarlet sel -N x=http://maven.apache.org/POM/4.0.0 -t -v '/x:project/x:version' pom.xml)\n"
