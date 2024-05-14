@@ -1,0 +1,11 @@
+% shell, uniq
+
+# Remove duplicate lines
+uniq <file>
+
+# Count duplicate lines
+sort <file> | uniq -c
+
+# Compare specific fields
+uniq --skip-fields=2 -c
+
