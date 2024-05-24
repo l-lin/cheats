@@ -9,5 +9,8 @@ docker exec -it ollama ollama pull <new_model>
 # Run LLM model in Ollama
 docker exec -it ollama ollama run <model>
 
-$ model: docker exec ollama ollama list | awk '{ print $1 }' | grep -v 'NAME'
+# Run LLM fast model in Ollama
+docker exec -it ollama ollama run <fast_model>
 
+$ model: docker exec ollama ollama list | awk '{ print $1 }' | grep -v 'NAME'
+$ fast_model: echo -e 'tinydolphin\nllama3-gradient\ndeepseek-coder'
