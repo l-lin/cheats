@@ -1,0 +1,5 @@
+% shell, amber
+
+# Replace interactively
+ambr <search> <replacement>
+
