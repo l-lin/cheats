@@ -40,3 +40,16 @@ echo '<math_expression>' | bc
 # Sum number from input
 cat <filename> | paste -sd+ | bc
 
+% shell, misc, lsblk
+
+# List filesystem devices
+lsblk
+
+# List disk partition table
+sudo fdisk -l
+
+# Create bootable USB flash drive
+sudo dd bs=4M conv=fsync oflag=direct status=progress if=<iso_file> of=/dev/<sdx>
+
+$ iso_file: ls -p *.iso
+$ sdx: lsblk | grep -E '^sd' | awk '{ print $1 }'
