@@ -1,0 +1,50 @@
+% vm, qemu
+; Tutorial: https://www.baeldung.com/linux/qemu-from-terminal
+
+# Create virtual hard disk image
+qemu-img create -f <disk_type> <filename>.<disk_type> <disk_size>
+
+$ disk_type: echo -e 'qcow2\nraw\n'
+$ disk_size: echo -e '10G\n20G\n50G\n'
+
+# Install new VM with ISO
+; -enable-kvm -> KVM to boost performance
+; -m 4G -> 4GB RAM
+; -smp 2 -> 2CPUs
+; -hda myVirtualDisk.qcow2 -> our 20GB variable-size disk
+; -boot d -> boots the first virtual CD drive
+; -cdrom linuxmint-21.1-cinnamon-64bit.iso -> Linux Mint ISO
+; -netdev user,id=net0,net=192.168.0.0/24,dhcpstart=192.168.0.9 -> NAT with DHCP
+; -device virtio-net-pci,netdev=net0 -> network card
+; -vga std -> powerful graphics card
+qemu-system-x86_64 \
+  -enable-kvm \
+  -m <ram_size> \
+  -smp <nb_cpus> \
+  -hda <virtual_disk_file> \
+  -boot d \
+  -cdrom <iso_filepath> \
+  -netdev user,id=net0,net=192.168.0.0/24,dhcpstart=192.168.0.9 \
+  -device virtio-net-pci,netdev=net0 \
+  -vga std
+
+# Start existing VM
+; Need a SPICE client, i.e. install with `yay -S virt-viewer`
+qemu-system-x86_64 \
+  -enable-kvm \
+  -m <ram_size> \
+  -smp <nb_cpus> \
+  -hda <virtual_disk_file> \
+  -netdev user,id=net0,net=192.168.0.0/24,dhcpstart=192.168.0.9 \
+  -device virtio-net-pci,netdev=net0 \
+  -vga std \
+  -device virtio-serial-pci \
+  -spice port=5930,disable-ticketing=on \
+  -device virtserialport,chardev=spicechannel0,name=com.redhat.spice.0 \
+  -chardev spicevmc,id=spicechannel0,name=vdagent \
+  -display spice-app
+
+$ ram_size: echo -e '4G\n'
+$ nb_cpus: echo -e '2\n'
+$ virtual_disk_file: ls
+
