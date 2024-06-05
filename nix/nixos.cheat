@@ -1,0 +1,13 @@
+% nix, nixos
+
+# Apply NixOS system configuration with flake from current directory
+sudo nixos-rebuild switch --flake '.#<username>'
+
+# Generate hardware configuration
+sudo nixos-generate-config --show-hardware-config
+
+# Update flake
+nix flake update
+
+$ username: echo -e 'l-lin\n'
+

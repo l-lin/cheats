@@ -1,0 +1,6 @@
+% nix, home-manager
+
+# Apply home configuration
+home-manager switch -b backup --flake '.#<hostname>'
+
+$ hostname: echo -e 'nixos\n'

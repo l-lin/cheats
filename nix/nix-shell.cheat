@@ -1,0 +1,8 @@
+% nix, nix-shell
+
+# Open a new nix-shell with your packages.
+nix-shell -p <package>
+
+# Search nix package
+nix search nixpkgs <package>
+
