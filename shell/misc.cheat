@@ -53,3 +53,7 @@ sudo dd bs=4M conv=fsync oflag=direct status=progress if=<iso_file> of=/dev/<sdx
 
 $ iso_file: ls -p *.iso
 $ sdx: lsblk | grep -E '^sd' | awk '{ print $1 }'
+
+# Add group to user
+sudo usermod -a -G <group> $(whoami)
+
