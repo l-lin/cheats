@@ -2,3 +2,9 @@
 
 # Configure computer network
 nmtui
+
+# Connect to hidden network
+nmcli con up <hidden_wifi_ssid>
+
+# List wifi devices
+nmcli device wifi
