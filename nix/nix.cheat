@@ -19,3 +19,5 @@ nix-shell -p <package>
 # Search nix package
 nix search nixpkgs <package>
 
+# Run a flake from a remote project.
+nix run github:<owner>/<repo>
