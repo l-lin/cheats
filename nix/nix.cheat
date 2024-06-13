@@ -21,3 +21,14 @@ nix search nixpkgs <package>
 
 # Run a flake from a remote project.
 nix run github:<owner>/<repo>
+
+% nix, elf
+
+# Patch interpreter of a binary to be NixOS supported.
+; See https://rootknecht.net/blog/patching-binaries-for-nixos/
+patchelf --set-interpreter $(patchelf --print-interpreter `which find`) <binary_file>
+
+# Check missing libraries of a binary.
+ldd <binary_file> | grep 'not found'
+
+$ binary_file: find . -maxdepth 1 -type f | sed 's~./~~'
