@@ -9,6 +9,9 @@ sudo nixos-generate-config --show-hardware-config
 # Update flake
 nix flake update
 
+# Update home-manager
+nix flake update home-manager
+
 $ username: echo -e 'l-lin\n'
 
 % nix, nix-shell
