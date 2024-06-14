@@ -26,12 +26,18 @@ nix search nixpkgs <package>
 nix run github:<owner>/<repo>
 
 % nix, elf
+; See https://rootknecht.net/blog/patching-binaries-for-nixos/
 
 # Patch interpreter of a binary to be NixOS supported.
-; See https://rootknecht.net/blog/patching-binaries-for-nixos/
 patchelf --set-interpreter $(patchelf --print-interpreter `which find`) <binary_file>
 
 # Check missing libraries of a binary.
 ldd <binary_file> | grep 'not found'
+
+# Find path of the path of a library in NixOS.
+nix eval 'nixpkgs#<lib>.outPath' --raw
+
+# Patch missing libraries / RPATH of a binary to be NixOS supported.
+patchelf --set-rpath "$(nix eval 'nixpkgs#<lib1>.outPath' --raw)/lib:$(nix eval 'nixpkgs#<lib2>.outPath' --raw)/lib" <binary_file>
 
 $ binary_file: find . -maxdepth 1 -type f | sed 's~./~~'
