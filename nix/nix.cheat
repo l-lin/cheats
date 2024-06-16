@@ -30,7 +30,7 @@ nix run github:<owner>/<repo>
 # List flake available outputs
 nix flake show <flake-ref>
 
-% nix, elf
+% nix, elf, fhs
 ; See https://rootknecht.net/blog/patching-binaries-for-nixos/
 
 # Patch interpreter of a binary to be NixOS supported.
@@ -39,10 +39,20 @@ patchelf --set-interpreter $(patchelf --print-interpreter `which find`) <binary_
 # Check missing libraries of a binary.
 ldd <binary_file> | grep 'not found'
 
-# Find path of the path of a library in NixOS.
+# Find package of a library in NixOS.
+nix-locate --minimal --top-level -w lib/<library>
+
+# Find path of a library in NixOS.
 nix eval 'nixpkgs#<lib>.outPath' --raw
 
 # Patch missing libraries / RPATH of a binary to be NixOS supported.
 patchelf --set-rpath "$(nix eval 'nixpkgs#<lib1>.outPath' --raw)/lib:$(nix eval 'nixpkgs#<lib2>.outPath' --raw)/lib" <binary_file>
 
+# Use steam-run to run binary in FHS environment.
+steam-run <binary_file>
+
+# Patch binary to be NixOS supported using nix-alien.
+nix-alien <binary_file>
+
 $ binary_file: find . -maxdepth 1 -type f | sed 's~./~~'
+$ library: echo -e "$(wl-paste)\n"
