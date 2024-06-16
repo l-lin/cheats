@@ -25,6 +25,11 @@ nix search nixpkgs <package>
 # Run a flake from a remote project.
 nix run github:<owner>/<repo>
 
+% nix, flake
+
+# List flake available outputs
+nix flake show <flake-ref>
+
 % nix, elf
 ; See https://rootknecht.net/blog/patching-binaries-for-nixos/
 
