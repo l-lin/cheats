@@ -22,13 +22,22 @@ nix-shell -p <package>
 # Search nix package
 nix search nixpkgs <package>
 
-# Run a flake from a remote project.
-nix run github:<owner>/<repo>
+# Find file hash used for flake
+nix-prefetch-url --unpack <url>
 
 % nix, flake
 
+# Run a flake from a remote project.
+nix run github:<owner>/<repo>
+
 # List flake available outputs
 nix flake show <flake-ref>
+
+# Build flake
+nix build '.#<flake-ref>'
+
+# Run flake
+nix run '.#<flake-ref>'
 
 % nix, elf, fhs
 ; See https://rootknecht.net/blog/patching-binaries-for-nixos/
