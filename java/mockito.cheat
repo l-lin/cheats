@@ -1,4 +1,4 @@
-% java, test, mockito
+% java, snippet, test, mockito
 
 # Check if an object is a mock
 assertTrue(Mockito.mockingDetails(<object>).isMock());

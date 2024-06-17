@@ -1,4 +1,4 @@
-% java
+% java, snippet
 
 # Count duplicate using Stream API
 items.stream()

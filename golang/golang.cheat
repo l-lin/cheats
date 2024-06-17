@@ -11,7 +11,7 @@ go install <package_name>
 
 $ go_mod_package_name: grep -P '\t' go.mod | awk '{ print $1 }'
 
-% golang, script
+% golang, snippet
 
 # Golang script to perform concurrent works with Ctrl+C as stop signal
 package main

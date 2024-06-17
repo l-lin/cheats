@@ -1,8 +1,8 @@
-% nodejs, http
+% nodejs, snippet, http
 
 # Simple HTTP server
 require("http")
-  .createServer(function (req, res) {
+  .createServer((req, res) => {
     let body = [];
     req
       .on("error", (err) => {
