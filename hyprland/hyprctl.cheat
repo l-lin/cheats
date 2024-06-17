@@ -1,0 +1,7 @@
+% hyprland
+
+# List hyprland windows
+hyprctl clients
+
+# List all monitors
+hyprctl monitors all
