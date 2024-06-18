@@ -25,7 +25,7 @@ nix search nixpkgs <package>
 # Find file hash used for flake
 nix-prefetch-url --unpack <url>
 
-% nix, flake
+% nix, flake, derivation
 
 # Run a flake from a remote project.
 nix run github:<owner>/<repo>
@@ -33,11 +33,14 @@ nix run github:<owner>/<repo>
 # List flake available outputs
 nix flake show <flake-ref>
 
-# Build flake
-nix build '.#<flake-ref>'
+# Build local flake / derivation
+nix build '.#<ref>'
 
-# Run flake
-nix run '.#<flake-ref>'
+# Run local flake / derivation
+nix run '.#<ref>'
+
+# Check flake / derivation result
+nix show-derivation '.#<ref>'
 
 % nix, elf, fhs
 ; See https://rootknecht.net/blog/patching-binaries-for-nixos/
