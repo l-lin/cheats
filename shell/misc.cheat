@@ -24,6 +24,12 @@ kill-on-port --port <port> --list
 # Trim whitespace
 echo '<text>' | xargs
 
+# Find the right thermal zone for your CPU
+; https://askubuntu.com/a/854029
+for f in /sys/class/thermal/thermal_zone*; do
+ echo "$f $(cat $f/type) $(cat $f/temp)" | column -t | sed 's/\(.\)..$/.\1°C/'
+done
+
 % shell, misc, rep
 
 # Replace word in text (add -w to execute)
