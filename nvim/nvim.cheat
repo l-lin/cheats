@@ -65,3 +65,5 @@ set_border_on_lsp()
 # Debug variable
 :lua vim.inspect(<variable>)
 
+# Check where a keymap is used
+:verbose imap <your_keymap>
