@@ -1,0 +1,45 @@
+% log
+
+# Change log level in spring-boot service at runtime
+ssh <host> \
+    'curl -s -X POST "http://localhost:9121/actuator/loggers/<logger>" \
+    -H "Content-Type: application/json" -d "{\"configuredLevel\":\"<level>\"}"'
+
+# Tail logs from remote container with colors with MDC
+; change colors at: https://colors.sh/
+debug_color='\o033[1;37;40m' \
+  && info_color='\o033[1;30;44m' \
+  && warn_color='\o033[1;30;43m' \
+  && error_color='\o033[1;30;41m' \
+  && end_color='\o33[0m' \
+  && faketty ssh <host> 'docker logs --tail <nb_last_logs> -f <service_name>' \
+  | jq --unbuffered \
+    -jr '
+      (."@timestamp" | . + " " * (30 - length)),
+      " ",
+      .level,
+      "|",
+        (.some_id | if . != null then " " + . else "" end),
+        (.another_id | if . != null then " " + . else empty end),
+      "| ",
+      .message,
+      "\n",
+      .stack_trace
+      | select(. != null)
+    ' \
+  | sed --unbuffered \
+    -e "s~|\(.*\)|~\o033[0;36m\1\o033[0m~" \
+    -e "s~DEBUG~${debug_color} D ${end_color}~" \
+    -e "s~INFO~${info_color} I ${end_color}~" \
+    -e "s~WARN~${warn_color} W ${end_color}~" \
+    -e "s~ERROR~${error_color} E ${end_color}~" \
+  | spacer
+
+# Get env variables from remote container
+ssh <host> 'docker exec <service_name> env' | sort
+
+$ nb_last_logs: echo -e '10\n'
+$ service_name: ssh <host> 'docker ps -a --format "{{.Names}}"' | grep -v cadvisor
+$ host: cat /etc/hosts | grep -v '#' | awk '{ print $2 }' | sort | uniq
+$ logger: echo -e 'com.example\n'
+$ level: echo -e 'ERROR\nWARN\nINFO\nDEBUG'
