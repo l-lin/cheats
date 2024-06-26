@@ -22,3 +22,9 @@ void testAutoConfiguration() {
     });
 }
 
+% java, spring
+
+# Change log level in spring-boot service at runtime
+ssh <host> \
+    'curl -s -X POST "http://localhost:9121/actuator/loggers/<logger>" \
+    -H "Content-Type: application/json" -d "{\"configuredLevel\":\"<level>\"}"'
