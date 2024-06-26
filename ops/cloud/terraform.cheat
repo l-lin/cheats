@@ -1,0 +1,98 @@
+% terraform
+
+# Show tfplan summary in table format
+tf-summarize -tree <tfplan_file>
+
+# Apply terraform resource
+terraform apply -var-file=<var_file> -target=<resource>
+
+$ tfplan_file: ls -p *
+$ resource: grep '^resource' *.tf | tr -d '"' | awk '{ print $2 "." $3 }'
+
+# Plan terraform for a given Terraform file
+tf_file=<input_file> \
+  && env=<env> \
+  && tf_resources=$(grep -E '^resource ' "${tf_file}" \
+    | tr -d '"' \
+    | awk '{ print "-target" "=" $2 "." $3 }' \
+    | tr '\n' ' ' \
+  ) \
+  && tf_modules=$(grep -E '^module ' "${tf_file}" \
+    | tr -d '"' \
+    | awk '{ print "-target" "=" $1 "." $2 }' \
+    | tr '\n' ' ' \
+  ) \
+  && tf_flags=$(echo ${tf_resources} ${tf_modules}) \
+  && eval terraform plan \
+    -out <tfplan_file> \
+    -compact-warnings \
+    -var-file "../../config/${env}/${env}.tfvars" \
+    "${tf_flags}"
+
+# Plan and apply terraform for a given Terraform file
+tf_file=<input_file> \
+  && env=<env> \
+  && tf_resources=$(grep -E '^resource ' "${tf_file}" \
+    | tr -d '"' \
+    | awk '{ print "-target" "=" $2 "." $3 }' \
+    | tr '\n' ' ' \
+  ) \
+  && tf_modules=$(grep -E '^module ' "${tf_file}" \
+    | tr -d '"' \
+    | awk '{ print "-target" "=" $1 "." $2 }' \
+    | tr '\n' ' ' \
+  ) \
+  && tf_flags=$(echo ${tf_resources} ${tf_modules}) \
+  && eval terraform apply \
+    -auto-approve \
+    -compact-warnings \
+    -var-file "../../config/${env}/${env}.tfvars" \
+    "${tf_flags}"
+
+# Destroy terraform resources for a given Terraform file
+tf_file=<input_file> \
+  && env=<env> \
+  && tf_resources=$(grep -E '^resource ' "${tf_file}" \
+    | tr -d '"' \
+    | awk '{ print "-target" "=" $2 "." $3 }' \
+    | tr '\n' ' ' \
+  ) \
+  && tf_modules=$(grep -E '^module ' "${tf_file}" \
+    | tr -d '"' \
+    | awk '{ print "-target" "=" $1 "." $2 }' \
+    | tr '\n' ' ' \
+  ) \
+  && tf_flags=$(echo ${tf_resources} ${tf_modules}) \
+  && eval terraform plan \
+    -destroy \
+    -out <tfplan_file> \
+    -compact-warnings \
+    -var-file "../../config/${env}/${env}.tfvars" \
+    "${tf_flags}"
+
+# Check infrastructure cost from Terraform plan with usage file
+terraform show -json <tfplan_file> > <tfplan_file>.json \
+  && docker run -it --rm \
+    -e INFRACOST_API_KEY="${INFRACOST_API_KEY}" \
+    -e INFRACOST_CURRENCY="EUR" \
+    -v $PWD/<tfplan_file>.json:/<tfplan_file>.json \
+    -v $PWD/<infracost_usage_file>:/<infracost_usage_file> \
+    infracost/infracost:ci-0.10 \
+      breakdown \
+      --show-skipped \
+      --path /<tfplan_file>.json \
+      --usage-file /<infracost_usage_file>
+
+# Always trigger terraform ressource
+triggers = {
+  always_run = "${timestamp()}"
+}
+
+# Trigger terraform resource on file change
+triggers = {
+  src_hash = "${filemd5(<input_file>)}"
+}
+
+$ input_file: ls -p *.tf
+$ tfplan_file: echo -e 'tfplan\n'
+$ infracost_usage_file: ls -p *.yml

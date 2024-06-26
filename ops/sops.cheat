@@ -1,0 +1,7 @@
+% sops
+
+# Get single secret from SOPS
+sops -d --extract '["<secret_group>"]["<secret_name>"]' "<secrets_file>"
+
+$ secret_group: yq 'to_entries | .[] | .key' <secrets_file>
+$ secret_name: yq '.<secret_group> | to_entries | .[] | .key' <secrets_file>
