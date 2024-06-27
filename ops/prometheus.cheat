@@ -1,0 +1,8 @@
+% prometheus
+
+# Unit test prometheus alert rules
+docker run -it --rm -v "${PWD}:/prometheus" \
+  --entrypoint promtool prom/prometheus \
+  test rules <alert_rule_test_file>
+
+$ alert_rule_test_file: ls -p *.yml
