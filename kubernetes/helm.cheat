@@ -1,0 +1,35 @@
+% kubernetes, helm
+
+# List helm repositories.
+helm repo ls
+
+# Update to latest helm charts.
+helm repo update
+
+# Add helm repository.
+helm repo add <new_helm_repository> <new_helm_repository_url>
+
+# List helm charts from a repository.
+helm search repo <helm_repository>
+
+# Install an helm chart.
+helm install <helm_chart> --generate-name
+
+# List helm releases of current namespace.
+helm ls
+
+# Show configurable options with detailed comments.
+helm show values <helm_chart>
+
+# Check helm release status.
+helm status <helm_release>
+
+# Uninstall a releases.
+helm uninstall <helm_release>
+
+# Upgrading a release.
+helm upgrade <helm_release> <helm_chart> --set ingress.enabled=true
+
+$ helm_repository: helm repo ls --- --header-lines 1 --column 1 --delimiter '\t+'
+$ helm_chart: helm search repo <helm_repository> --- --header-lines 1 --column 1 --delimiter '\t+'
+$ helm_release: helm ls --- --header-lines 1 --column 1 --delimiter '\t+'

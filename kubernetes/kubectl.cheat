@@ -1,0 +1,117 @@
+% kubernetes, kubectl, help
+
+# Access to resource documentation.
+kubectl explain pods
+
+# Use json path to go further.
+kubectl explain pods.spec.containers
+
+# List all supported resources.
+kubectl api-resources
+
+# Access to the list of resource specifications.
+# Each resource can be used in the YAML description,
+# e.g. pods.spec.initContainers will be written in the
+# pod descriptor:
+# ```yaml
+# spec:
+#   initContainers:
+#   - name: foobar
+# ```
+kubectl explain <resource_name>.spec
+
+# Nuke all.
+kubectl delete all --all
+
+# Get multiple resources in one line, e.g. get pods and replicasets.
+kubectl get po,rs
+
+# -----------------------------------------------------------------
+
+% kubernetes, kubectl, pod
+
+# Start a pod.
+kubectl run <new_pod_name> --image <image_name> --port <port>
+
+# List all pods.
+kubectl get po
+
+# Get pods' metadata.
+kubectl describe po
+
+# Execute command in pod.
+kubectl exec -it <pod_name> -- <command>
+
+# Execute shell command on specific container.
+kubectl exec -it <pod_name> -c <container_name> -- <command>
+
+# Selete a pod.
+kubectl delete po <pod_name>
+
+# Generate k8s pod description file.
+kubectl run <pod_name> --image <image_name> --port <port> --dry-run client -o yaml > <pod_name>.yml
+
+# Get pod ip.
+kubectl get -o go-template --template='{{.status.podIP}}' pod whoami
+
+# Show pod labels.
+kubectl get po --show-labels
+
+# Add labels.
+kubectl label pod <pod_name> <label_name>=<label_value>
+
+# Update a label.
+kubectl label pod <pod_name> <label_name>=<label_value> --overwrite
+
+# Get pods with their labels displayed in columns.
+kubectl get po --label-columns label1,label2
+
+# Get pods that have the label 'foobar' with value 'barfoo'.
+kubectl get po --selector foobar=barfoo
+
+# Get pods that do not have the label 'foobar'.
+kubectl get po --selector '!foobar'
+
+# Get pods that have label 'run' with value 'foo' or 'bar' and 'release' label is not specified.
+kubectl get po --selector 'run in (foo,bar),!release'
+
+# Get all annotations.
+kubectl get po -o json <pod_name> | jq .metadata.annotations
+
+# Get pod name.
+kubectl get po -l app=front -o name
+
+# Add annotation to a pod.
+kubectl annotate po <pod_name> <annotation_name>=<annotation_value>
+
+# Read logs, container_name is mandatory if the pod has multiple containers.
+kubectl logs <pod_name> -c <container_name>
+
+# Read and follow pod logs.
+kubectl logs -f <pod_name>
+
+$ pod_name: kubectl get po --- --header-lines 1 --column 1 --delimiter '\s\s+'
+
+% kubernetes, kubectl, node
+
+# Get kubernetes nodes.
+kubectl get nodes
+
+# Add label to kubernetes node.
+kubectl label node <node_name> <label_name>=<label_value>
+
+# -----------------------------------------------------------------
+
+% kubernetes, kubectl, replicasets
+
+# Get replicasets.
+kubectl get rs
+
+# Change scaling.
+kubectl scale rs <replicaset_name> --replicas=<replicas>
+
+# Delete a replicaset, it will also delete the associated pods!.
+kubectl delete rs <replicaset_name>
+
+$ replicaset_name: kubectl get rs --- --header-lines 1 --column 1 --delimiter '\s\s+'
+$ replicas: echo -e '1\n2\n3\n4\n5\n6\n7\n8\n9\n10'
