@@ -1,0 +1,22 @@
+% security, age
+
+# Encrypt a file with a passphrase.
+age --passphrase --output <file_to_encrypt>.age <file_to_encrypt>
+
+# Decrypt a file with a passphrase.
+age --decrypt --output <decrypted_file> <encrypted_file>
+
+# Encrypt a file to one or more recipients with their public keys specified in a file.
+age --recipients-file <recipients_file> --output <file_to_encrypt>.age <file_to_encrypt>
+
+# Decrypt a file with a private key file.
+age --decrypt --identity <private_key_file> --output <decrypted_file> <encrypted_file>
+
+# Encrypt all files in the current directory.
+for f in *; do age --recipients-file <recipients_file> --output "${f}.age" "${f}"; done
+
+$ recipients_file: ls -p ${HOME}/.ssh/*.pub
+$ private_key_file: ls -p ${HOME}/.ssh/* | grep -v '.pub' | grep -v config | grep -v known_hosts
+$ file_to_encrypt: ls -p | grep -v /
+$ encrypted_file: ls -p *.age
+$ decrypted_file: echo -e <encrypted_file> | sed 's/\.age$//'
