@@ -1,0 +1,39 @@
+% web-socket, snippet
+
+# Sample HTML page for WebSocket connection.
+<html>
+  <head>
+    <meta charset="utf-8">
+  </head>
+  <body>
+    <form onsubmit="return false;">
+        <div>
+            <label>
+                Token:
+                <input id="token" type="text" value="awesome-token">
+            </label>
+        </div>
+        <div>
+            <input type="submit" onclick="start()" value="Start"/>
+        </div>
+    </form>
+    <script>
+      function start() {
+        console.log('opening websocket');
+        const token = document.getElementById('token').value;
+        //document.cookie = 'Authorization=' + token + '; path=/; secure; SameSite=None';
+        const socket = new WebSocket('ws://localhost');
+
+        // Connection opened
+        socket.addEventListener('open', (event) => {
+            socket.send('Hello Server!');
+        });
+
+        // Listen for messages
+        socket.addEventListener('message', (event) => {
+          console.log('Message from server ', event.data);
+        });
+      }
+    </script>
+  </body>
+</html>
