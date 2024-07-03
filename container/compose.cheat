@@ -93,3 +93,15 @@ services:
       # We override the image's `command` anyways, hence this container will not start a broker.
       KAFKA_BROKER_ID: ignored
       KAFKA_ZOOKEEPER_CONNECT: ignored
+
+# Mongo docker compose definition
+services:
+  mongo:
+    image: mongo:7.0.12
+    container_name: mongo
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: mongo
+      MONGO_INITDB_ROOT_PASSWORD: mongo
+    ports:
+      - 27017:27017
+
