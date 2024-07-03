@@ -10,14 +10,14 @@ kubectl explain pods.spec.containers
 kubectl api-resources
 
 # Access to the list of resource specifications.
-# Each resource can be used in the YAML description,
-# e.g. pods.spec.initContainers will be written in the
-# pod descriptor:
-# ```yaml
-# spec:
-#   initContainers:
-#   - name: foobar
-# ```
+; Each resource can be used in the YAML description,
+; e.g. pods.spec.initContainers will be written in the
+; pod descriptor:
+; ```yaml
+; spec:
+;   initContainers:
+;   - name: foobar
+; ```
 kubectl explain <resource_name>.spec
 
 # Nuke all.
