@@ -15,6 +15,9 @@ age --decrypt --identity <private_key_file> --output <decrypted_file> <encrypted
 # Encrypt all files in the current directory.
 for f in *; do age --recipients-file <recipients_file> --output "${f}.age" "${f}"; done
 
+# Decrypt all files in the current directory.
+for f in *.age; do age --decrypt --identity <private_key_file> --output "${f/.age/}" "${f}"; done
+
 $ recipients_file: ls -p ${HOME}/.ssh/*.pub
 $ private_key_file: ls -p ${HOME}/.ssh/* | grep -v '.pub' | grep -v config | grep -v known_hosts
 $ file_to_encrypt: ls -p | grep -v /
