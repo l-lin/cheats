@@ -1,4 +1,5 @@
 % security, age
+@ ssh, common
 
 # Encrypt a file with a passphrase.
 age --passphrase --output <file_to_encrypt>.age <file_to_encrypt>
@@ -19,7 +20,6 @@ for f in *; do age --recipients-file <recipients_file> --output "${f}.age" "${f}
 for f in *.age; do age --decrypt --identity <private_key_file> --output "${f/.age/}" "${f}"; done
 
 $ recipients_file: ls -p ${HOME}/.ssh/*.pub
-$ private_key_file: ls -p ${HOME}/.ssh/* | grep -v '.pub' | grep -v config | grep -v known_hosts
 $ file_to_encrypt: ls -p | grep -v /
 $ encrypted_file: ls -p *.age
 $ decrypted_file: echo -e <encrypted_file> | sed 's/\.age$//'

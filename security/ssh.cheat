@@ -1,0 +1,19 @@
+% ssh, common
+
+$ private_key_file: ls -p ${HOME}/.ssh/id_* | grep -v '.pub'
+
+% ssh, ssh-add
+@ ssh, common
+
+# List fingerprints of all identities currently represented by the ssh-agent.
+ssh-add -l
+
+# Delete all identities from ssh-agent.
+ssh-add -D
+
+# Insert all SSH keys from well known ssh directory to the ssh-agent.
+ssh-add
+
+# Insert SSH keys to the ssh-agent.
+ssh-add <private_key_file>
+
