@@ -1,0 +1,8 @@
+% mpc
+
+# Remove all songs from queue.
+mpc clear
+
+# Add all songs to queue.
+mpc update -w && mpc add $(mpc ls)
+
