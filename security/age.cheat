@@ -23,3 +23,4 @@ $ recipients_file: ls -p ${HOME}/.ssh/*.pub
 $ file_to_encrypt: ls -p | grep -v /
 $ encrypted_file: ls -p *.age
 $ decrypted_file: echo -e <encrypted_file> | sed 's/\.age$//'
+$ private_key_file: ls -p ${HOME}/.ssh/* | grep -v .pub | grep -v config | grep -v hosts | grep -v allowed_signers
