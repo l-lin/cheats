@@ -39,6 +39,17 @@ git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g'
 # Pull with submodules
 git submodule update --recursive --remote
 
+# Create a shallow clone with only HEAD.
+git clone --depth 1
+
+# Sparse checkout only files at the root.
+; src: https://github.blog/2020-01-17-bring-your-monorepo-down-to-size-with-sparse-checkout/
+git sparse-checkout init --cone && git checkout main
+
+# Sparse checkout only files in specific directories (recursive).
+; src: https://github.blog/2020-01-17-bring-your-monorepo-down-to-size-with-sparse-checkout/
+git sparse-checkout set <dir1> <dir2> && git checkout main
+
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ branch_type: echo -e 'feature\nbugfix\ntask\nrefactor'
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
