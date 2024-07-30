@@ -1,0 +1,89 @@
+% curl
+
+# curl with a config file.
+; .curlrc contains curl flags without the dashes, e.g.:
+; ```
+; output-dir /tmp
+; show-error
+; silent
+; ```
+curl --config /path/to/.curlrc <url>
+
+# curl multiple URLs.
+curl <url1> <url2>
+
+# curl with response headers included.
+curl -i <url>
+
+# Returns only headers with curl.
+curl --head <url>
+
+# Extract response status and content type with curl.
+curl -w "status: %{response_code}\ntype: %{content_type}" <url>
+
+# Extract response headers with curl.
+$ curl -w "date: %header{date}\nlength: %header{content-length}" <url>
+
+# Download file with curl.
+curl --output-dir <directory> --create-dirs -O <url>
+
+# Upload files with curl.
+curl --upload-file <file> <url>
+
+# Retry HTTP requests with curl.
+$ curl --retry <nb_retries> --retry-max-time <retry_max_time> --retry-delay <retry_delay> <url>
+
+# Perform concurrent HTTP requests with curl.
+curl 'https://httpbin.org/anything/[1-9].txt'
+
+# Limit HTTP requests per second with curl.
+curl --rate 3/s 'https://httpbin.org/anything/[1-9].txt'
+
+# Limit bandwidth usage with curl.
+curl --limit-rate 1k <url>
+
+# Max timeouts HTTP requests with curl.
+curl --max-time 0.5 <url>
+
+# Connect timeout HTTP requests with curl.
+curl --connect-timeout 0.5 <url>
+
+# Pass credentials from a file with curl.
+; .netrc contains the credentials, e.g.:
+; ```
+; machine httpbin.org
+; login alice
+; password cheese
+; ```
+curl --netrc-file /path/to/.netrc <url>
+
+# Post data with curl.
+curl -d "foo=bar" -d "age=25" https://httpbin.org/post
+
+# Post data from file with curl.
+curl -d '@<file>' <url>
+
+# URL encode the requests with curl.
+curl --data-urlencode "Name: Foo Bar" <url>
+
+# Post form with curl.
+curl -f "foo=bar" <url>
+
+# Redirect with endless loop protection with curl.
+curl -L --max-redirs 3 <url>
+
+# Save cookie with curl.
+curl -b "" -c /tmp/cookies <url>
+
+# Use cookie with curl.
+curl -b /tmp/cookies <url>
+
+# Enable HSTS with curl.
+curl --hsts /tmp/hsts -o /dev/null <url>
+
+$ directory: echo -e '/tmp\n'
+$ file: ls -p *
+$ nb_retries: echo -e '3\n2\n1\n'
+$ retry_max_time: echo -e '10\n'
+$ retry_delay: echo -e '1\n'
+
