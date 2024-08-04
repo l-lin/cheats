@@ -17,3 +17,10 @@ ssh-add
 # Insert SSH keys to the ssh-agent.
 ssh-add <private_key_file>
 
+% ssh, ssh-keygen
+
+ssh-keygen -t <key_type> -a <nb_rounds> -C '<comment>'
+
+$ key_type: echo -e 'ed25519\n'
+$ nb_rounds: echo -e '100\n'
+
