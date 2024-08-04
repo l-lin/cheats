@@ -55,3 +55,20 @@ $ branch_type: echo -e 'feature\nbugfix\ntask\nrefactor'
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ file_path: find . -type f -not -path './.git/*' -not -path './target/*' -not -path './node_modules/*'
 $ jira_id: echo -e "$(wl-paste)\n"
+
+% git, worktree
+
+# Create a new worktree.
+git worktree add <new_worktree_path> <branch_name>
+
+# List all worktrees.
+git worktree list
+
+# Delete a worktree.
+git worktree remove <worktree_path>
+
+$ branch_name: git branch -a | grep 'remotes/origin' | sed 's~remotes/origin/~~' | sed '1d' | sed 's/ //g'
+$ new_worktree_path: echo -n "../<folder_name>-<branch_name>"
+$ folder_name: echo -n "${PWD##*/}"
+$ worktree_path: git worktree list --- --column 1 --delimiter '\s\s+'
+
