@@ -1,0 +1,4 @@
+% gnome
+
+# Search gnome key bindings.
+gsettings list-recursively | rg '<key_binding>'
