@@ -12,6 +12,10 @@ tar -xf <input_file> <file1>
 # List archive.tar.xz content
 tar -tvf <input_file>
 
+# Extract txz file.
+xz -d < <txz_input_file> | tar xvf -
+
 $ input_file: ls -p *.tar.xz
+$ txz_input_file: ls -p *.txz
 $ output_directory: echo */ | tr ' ' '\n'
 
