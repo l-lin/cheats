@@ -6,3 +6,6 @@ mpc clear
 # Add all songs to queue.
 mpc update -w && mpc add $(mpc ls)
 
+# Start mpd if not running and add all songs to queue.
+pgrep mpd || mpd && mpc add $(mpc ls) && mpc random && mpc repeat
+
