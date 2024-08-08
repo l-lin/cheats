@@ -30,6 +30,9 @@ for f in /sys/class/thermal/thermal_zone*; do
  echo "$f $(cat $f/type) $(cat $f/temp)" | column -t | sed 's/\(.\)..$/.\1°C/'
 done
 
+# Source file if it exists.
+[[ ! "<file>" ]] || source "<file>"
+
 % shell, misc, rep
 
 # Replace word in text (add -w to execute)
