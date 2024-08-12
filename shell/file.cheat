@@ -5,3 +5,13 @@ file_path=<file_path> && echo ${file_path##*/}
 
 # Get filename without extension
 file_path=<file_path> && echo ${file_path%.*}
+
+# Check if file exists.
+if [ -e <file_path> ]; then echo "<file_path> exists"; else echo "<file_path> does not exist"; fi
+
+# Check if directory exists
+if [ -d <dir_path> ]; then echo "<dir_path> exists"; else echo "<dir_path> does not exist"; fi
+
+# Check if file is executable
+if [ -x <file_path> ]; then echo "<file_path> is executable"; else echo "<file_path> is not executable"; fi
+
