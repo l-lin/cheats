@@ -1,0 +1,8 @@
+% java, lsp, nvim
+
+# Invalidate all Java LSP files.
+files_to_delete=('.settings' '.project' '.classpath' '.factorypath') \
+  && for file_to_delete in ${files_to_delete[@]}; do \
+    find . -type f -name "${file_to_delete}" -exec rm {} \;
+  done
+
