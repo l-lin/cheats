@@ -1,6 +1,6 @@
 % java, snippet
 
-# Count duplicate using Stream API
+# Count duplicate using Stream API.
 items.stream()
      .map(Item::getId)
      .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
@@ -9,21 +9,14 @@ items.stream()
      .filter(x -> x > 1)
      .count();
 
-# Read file line by line with Scanner
-try (var scanner = new Scanner(new File("filename.txt"))) {
-    while (scanner.hasNextLine()) {
-        String nextLine = scanner.nextLine();
-    }
-}
-
-# Check which Garbage collector is used
+# Check which Garbage collector is used.
 ; https://stackoverflow.com/a/5175321/3612053
 List<GarbageCollectorMXBean> l = ManagementFactory.getGarbageCollectorMXBeans();
 for(GarbageCollectorMXBean b : l) {
     System.out.println(b.getName());
 }
 
-# Kafka consumer
+# Kafka consumer.
 @Slf4j
 @RequiredArgsConstructor
 public class KafkaMessageProcessor implements Runnable, AutoCloseable {
@@ -95,7 +88,41 @@ public class KafkaMessageProcessor implements Runnable, AutoCloseable {
     }
 }
 
-# Delete a file or folder in Java
+% java, io, snippet
+; src: https://dev.java/learn/modernio/
+
+# Read file line by line with Scanner
+try (var scanner = new Scanner(new File("filename.txt"))) {
+    while (scanner.hasNextLine()) {
+        String nextLine = scanner.nextLine();
+    }
+}
+
+# Read text file into a String.
+String content = Files.readString(Path.of("/path/to/file.txt"));
+
+# Read all lines.
+List<String> lines = Files.readAllLines(Path.of("/path/to/file.txt"));
+
+# Read all lines from large file.
+try (Stream<String> lines = Files.lines(Path.of("/path/to/file.txt")) {
+}
+
+# Read words separated by non-letters.
+Stream<String> tokens = new Scanner(path).useDelimiter("\\PL+").tokens();
+
+# Write String to file.
+Files.writeString(Path.of("/path/to/file.txt"), content);
+
+# Write list of lines to file.
+List<String> lines = List.of("line1", "line2", "line3");
+Files.write(path, lines);
+
+# Write to file with printf.
+var writer = new PrintWriter(path.toFile());
+writer.printf(locale, "Hello, %s, next year you'll be %d years old!%n", name, age + 1);
+
+# Delete a file or folder in Java.
 private void deleteFile(Path path) {
     try {
         if (Files.exists(path)) {
@@ -122,5 +149,26 @@ private static void deleteFolder(Path path) {
         }
     } catch (IOException e) {
         throw new UncheckedIOException("Failed to delete build folder", e);
+    }
+}
+
+% java, http client, snippet
+
+# Java native HTTP client.
+HttpClient client = HttpClient.newBuilder().build();
+HttpRequest request = HttpRequest.newBuilder()
+    .uri(URI.create("https://horstmann.com/index.html"))
+    .GET()
+    .build();
+HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
+String result = response.body();
+
+# Get data from HTTP response.
+try (InputStream in = new URI("https://horstmann.com/index.html").toURL().openStream()) {
+    byte[] bytes = in.readAllBytes();
+    String result = new String(bytes);
+    // or
+    try (OutputStream out = Files.newOutputStream(path)) {
+        in.transferTo(out);
     }
 }
