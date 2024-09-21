@@ -1,16 +1,19 @@
 % nix, nixos
 
-# Apply NixOS system configuration with flake from current directory
+# Apply NixOS system configuration with flake from current directory.
 sudo nixos-rebuild switch --flake '.#<username>'
 
-# Generate hardware configuration
+# Generate hardware configuration.
 sudo nixos-generate-config --show-hardware-config
 
-# Update flake
+# Update flake.
 nix flake update
 
-# Update home-manager
+# Update home-manager.
 nix flake update home-manager
+
+# Run nix garbage collection.
+nix-store --gc
 
 $ username: echo -e 'l-lin\n'
 
@@ -19,10 +22,10 @@ $ username: echo -e 'l-lin\n'
 # Open a new nix-shell with your packages.
 nix-shell -p <package>
 
-# Search nix package
+# Search nix package.
 nix search nixpkgs <package>
 
-# Find file hash used for flake
+# Find file hash used for flake.
 nix-prefetch-url --unpack <url>
 
 % nix, flake, derivation
@@ -30,16 +33,16 @@ nix-prefetch-url --unpack <url>
 # Run a flake from a remote project.
 nix run github:<owner>/<repo>
 
-# List flake available outputs
+# List flake available outputs.
 nix flake show <flake-ref>
 
-# Build local flake / derivation
+# Build local flake / derivation.
 nix build '.#<ref>'
 
-# Run local flake / derivation
+# Run local flake / derivation.
 nix run '.#<ref>'
 
-# Check flake / derivation result
+# Check flake / derivation result.
 nix show-derivation '.#<ref>'
 
 # Find root of a flake / derivation.
