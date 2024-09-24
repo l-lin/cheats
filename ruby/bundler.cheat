@@ -1,0 +1,8 @@
+% ruby, bundler
+
+# Install ruby gems.
+bundle install
+
+# Update ruby gems.
+bundle update
+

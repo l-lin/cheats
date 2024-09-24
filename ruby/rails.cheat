@@ -1,0 +1,9 @@
+% ruby, rails
+
+# Execute rails tests of a file
+bundle exec rails test <test_file>
+
+# Execute rails one test of a file
+bundle exec rails test <test_file>:<line_number>
+
+$ test_file: find . -type f -name '*_test.rb'
