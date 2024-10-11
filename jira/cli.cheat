@@ -1,0 +1,53 @@
+% jira
+
+# Open jira board in browser.
+jira open
+
+# View my current jira issues interactively.
+jira issue list -a$(jira me) -s~Done --plain --columns id,summary,status \
+  | fzf \
+    --layout reverse \
+    --header-lines 1 \
+    --preview-window 'bottom:80%:wrap' \
+    --preview 'jira issue view {1}' \
+    --bind 'alt-p:toggle-preview' \
+    --bind 'alt-j:preview-up' \
+    --bind 'alt-k:preview-down' \
+    --bind "alt-a:execute(jira issue assign {1} $(jira me))" \
+    --bind 'alt-e:execute(jira issue edit {1})' \
+    --bind 'alt-m:execute(jira issue move {1})' \
+    --bind 'alt-c:execute(jira issue comment add {1})'
+
+% jira, issue
+
+# View unassigned jira issues.
+jira issue list -ax --created week
+
+# View my current jira issues.
+jira issue list -a$(jira me) -s~Done
+
+# View my jira issue history.
+jira issue list --history
+
+# View jira issues I reported this week.
+jira issue list -r$(jira me) --created week
+
+# Add comment jira issue.
+jira issue command add <issue>
+
+# Assign jira issue to self.
+jira issue assign <issue> $(jira me)
+
+# Unassign jira issue.
+jira issue assign <issue> x
+
+$ issue: jira issue list -s~Done --- --headers 1 --column 2 --delimiter '\s+'
+
+% jira, sprint
+
+# View current sprint unfinished jira issues.
+jira sprint list --current --order-by status -s~Done
+
+# View current sprint unfinished and unassigned jira issues.
+jira sprint list --current --order-by status -s~Done -ax
+
