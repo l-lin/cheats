@@ -1,0 +1,225 @@
+% ruby
+
+# Open REPL / interactive ruby
+irb
+
+# Prints to console with newline.
+puts 'Whatever you want'
+
+# Prints to console without newline.
+print 'Whatever you want'
+
+; -----------------------------------------------------------------------------
+
+% ruby, string
+
+# Custom delimiter string to avoid escaping quotes.
+str = %(this string is "surrounded" with delimiter so we don't have to escape quotes)
+
+# Concat strings.
+str = 'this' + ' ' 'is' << ' '.concat('a ' << 'string')
+
+# Multi-lines string.
+str = <<DOC
+this is a heredoc
+that spans multiple lines
+DOC
+
+# Freeze string to prevent it from being modified.
+str.freeze
+
+# Check if string contains a sub string.
+'string'.include? 'ing'
+
+# Check strings equality.
+'foo' == 'bar'
+'foo'.eql? 'bar'
+
+# Compare variables.
+puts 'foo' <=> 'bar' # -1 if left is lower, 0 if equal, 1 if left is greater
+
+# Compare case insensitive.
+'foo'.casecmp('bar')
+'foo'.casecmp('Foo')
+
+# Repeat strings.
+'Hello ' * 3
+
+# Remove trailing character from the right.
+'Hello '.chop # returns 'Hello'
+
+# Remove trailing newling from the right.
+"Hello\n".chomp
+
+# Trim whitespace.
+"     Hello    ".strip # returns "Hello"
+
+# Reverse string.
+'Hello'.reverse
+
+# String interpolation.
+name = 'John Doe'
+"Hello #{name}"
+
+; -----------------------------------------------------------------------------
+
+% ruby, array
+
+# Create empty array.
+arr = Array.new
+arr = []
+
+# Append to an array.
+arr << a_value # with shovel operator
+arr.append(a_value)
+
+# Create array of words.
+first_name, last_name = %w[John Doe]
+
+# Create array of words with splat operator.
+first_name, *last_name = %w[John Smith III]
+assert_equal 'John', first_name
+assert_equal %w[Smith III], last_name
+
+# Create array of symbols.
+arr = %i[:foo :bar]
+
+# Create array of range from 1 to 10 inclusive.
+(1..10).to_a
+
+# Create array of range from 1 to 10 exclusive.
+(1...10).to_a
+
+# Create array of character range, 'a' to 'f' exclusive.
+('a'...'f').to_a
+
+# Get first element of array.
+[1, 2, 3].first
+[1, 2, 3][0]
+
+# Get last element of array.
+[1, 2, 3].last
+[1, 2, 3][-1]
+
+# Get index of element.
+[10, 20, 30].index(20) # 1
+
+# Get slice of array.
+[1, 2, 3, 4, 5].slice(3, 2) # [4, 5]
+
+# Get min value of array.
+[10, 1, 5, 90].min
+
+# Get max value of array.
+[10, 1, 5, 90].max
+
+# Check if array contains a value.
+arr.include? 10
+
+# Check if array is empty.
+arr.is_empty?
+
+# Get array size.
+arr.size
+
+# Loop over an array.
+arr.each { |nb| puts "This is number #{nb}" }
+
+# Filter values from an array.
+arr.reject { |nb| nb < 3 }.each { |nb| puts "This is filtered number #{nb}" }
+
+# Return unique value of array.
+unique_arr = array.uniq
+
+# Only keeo unique values of array.
+arry.uniq!
+
+# Insert element in a specific index of array.
+arr.insert(1, 6)
+
+# Delete an element in array with an index.
+arr.delete_at(1) # returns nil if no element was deleted
+
+# Delete an element in array with a value.
+arr.delete(10) # returns nil if no element was deleted
+
+# Sort array.
+sorted_arr = arr.sort
+
+# Sort reverse
+reverse_sorted_arr = arr.sort.reverse
+
+# Pop an element of array.
+element = arr.pop
+
+; -----------------------------------------------------------------------------
+
+% ruby, switch
+
+# Switch statement
+score = 70
+result = case score
+         when 0..59 then 'Fail'
+         when 60..69 then 'Pass'
+         when 70..79 then 'Good'
+         when 80..89 then 'Very good'
+         when 90..100 then 'Excellent'
+         else 'Invalid score'
+         end
+puts "Score is #{result}"
+
+; -----------------------------------------------------------------------------
+
+% ruby, variable
+
+# Check if variable exists.
+puts arr if defined? arr
+
+; -----------------------------------------------------------------------------
+
+% ruby, loop
+
+# For loop by index.
+for i in 0..3
+  print "#{i} "
+end
+
+# Times loop.
+5.times { |j| print "#{j} " }
+
+# While loop.
+while i < 10
+  print "#{i} "
+  i += 1
+  # We can add a condition to break the loop.
+  break if i == 5
+end
+
+# Until loop.
+i = 0
+# Use `until` instead of `while` for reverse condition.
+until i == 3
+  print "#{i} "
+  i += 1
+end
+
+# Upto loop.
+1.upto(3) { |j| print "#{j} " }
+'a'.upto('d') { |c| print "#{c} " }
+
+# Downto loop.
+3.downto(1) { |j| print "#{j} " }
+
+; -----------------------------------------------------------------------------
+
+% ruby, symbols
+
+# Get all symbols
+Symbol.all_symbols.map { |x| x.to_s }
+
+# Transform string to symbol.
+'hello'.to_sym
+
+# Dynamically create a symbol.
+("cats" + "dogs").to_sym
+
