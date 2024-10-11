@@ -3,21 +3,6 @@
 # Open jira board in browser.
 jira open
 
-# View my current jira issues interactively.
-jira issue list -a$(jira me) -s~Done --plain --columns id,summary,status \
-  | fzf \
-    --layout reverse \
-    --header-lines 1 \
-    --preview-window 'bottom:80%:wrap' \
-    --preview 'jira issue view {1}' \
-    --bind 'alt-p:toggle-preview' \
-    --bind 'alt-j:preview-up' \
-    --bind 'alt-k:preview-down' \
-    --bind "alt-a:execute(jira issue assign {1} $(jira me))" \
-    --bind 'alt-e:execute(jira issue edit {1})' \
-    --bind 'alt-m:execute(jira issue move {1})' \
-    --bind 'alt-c:execute(jira issue comment add {1})'
-
 % jira, issue
 
 # View unassigned jira issues.
