@@ -310,3 +310,18 @@ assert_equal [1, 'two'], method_with_keyword_arguments
 assert_equal %w[one two], method_with_keyword_arguments(one: 'one')
 assert_equal [1, 2], method_with_keyword_arguments(two: 2)
 
+; -----------------------------------------------------------------------------
+
+% ruby, exception
+
+# Handling exception.
+result = nil
+begin
+  raise 'Oops' # or `fail 'Oops'`, it's the same
+rescue StandardError
+  result = :error_value
+ensure
+  result = :always_run
+end
+
+assert_equal :always_run, result
