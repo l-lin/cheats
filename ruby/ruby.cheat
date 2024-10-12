@@ -61,6 +61,26 @@ puts 'foo' <=> 'bar' # -1 if left is lower, 0 if equal, 1 if left is greater
 name = 'John Doe'
 "Hello #{name}"
 
+# Check if a pattern is in a string with regex.
+(/a pattern/ =~ 'prefix a pattern suffix').nil? # returns nil if the pattern is not found in string
+
+# Find string with pattern / regex.
+'abbcccddddeeeee'[/bc+/] # returns 'bccc'
+
+# Find string with pattern / regex and use captures.
+'Name:  Gray, James'[/(\w+), (\w+)/] # returns 'Gray, James'
+::Regexp.last_match(1) # returns 'Gray'
+::Regexp.last_match(2) # returns 'James'
+
+# Find strings with pattern / regex and return array.
+'one two-three'.scan(/\w+/) # return %w[one two three]
+
+# Find and replace string with pattern / regex.
+'one two-three'.sub(/(t\w*)/) { ::Regexp.last_match(1)[0, 1] } # returns 'one t-three'
+
+# Find and replace all string with pattern / regex.
+'one two-three'.gsub(/(t\w*)/) { ::Regexp.last_match(1)[0, 1] } # returns 'one t-t'
+
 ; -----------------------------------------------------------------------------
 
 % ruby, array
@@ -127,6 +147,10 @@ arr.each { |nb| puts "This is number #{nb}" }
 
 # Filter values from an array.
 arr.reject { |nb| nb < 3 }.each { |nb| puts "This is filtered number #{nb}" }
+
+# Filter values from an array using regex.
+animals = ["cat", "bat", "rat", "zat"]
+animals.select { |a| a[/[cbr]at/] } # returns %w[cat bat rat]
 
 # Return unique value of array.
 unique_arr = array.uniq
