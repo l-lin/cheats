@@ -257,3 +257,20 @@ hash.values.include?('value1')
 # Merge two hashes.
 hash.merge(another_hash) # values from the right takes precedence!
 
+; -----------------------------------------------------------------------------
+
+% ruby, method
+
+# Create a method with default value.
+def my_method(arg1, arg2 = 2)
+  arg1 + arg2
+end
+
+# Create a method with a keyword.
+def method_with_keyword_arguments(one: 1, two: 'two')
+  [one, two]
+end
+assert_equal [1, 'two'], method_with_keyword_arguments
+assert_equal %w[one two], method_with_keyword_arguments(one: 'one')
+assert_equal [1, 2], method_with_keyword_arguments(two: 2)
+
