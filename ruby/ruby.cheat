@@ -214,7 +214,7 @@ end
 
 % ruby, symbols
 
-# Get all symbols
+# Get all symbols.
 Symbol.all_symbols.map { |x| x.to_s }
 
 # Transform string to symbol.
@@ -222,4 +222,38 @@ Symbol.all_symbols.map { |x| x.to_s }
 
 # Dynamically create a symbol.
 ("cats" + "dogs").to_sym
+
+; -----------------------------------------------------------------------------
+
+% ruby, hash
+
+# Create new hash.
+hash = Hash.new # default value will be `nil`
+hash = Hash.new('foo') # default value will be 'foo' if we try to access with a non-existing key
+hash = Hash.new { |h, key| h[key] = [] } # create an Array for each key
+hash.default = 'another default' # we can define the default value afterward, not sure what is the use case for this...
+hash = {}
+hash = {:foo => 'foo', :bar => 'bar'}
+hash = {foo: 'foo', bar: 'bar'} # prefered syntax
+
+# Access to a element of hash.
+hash[:foo] # returns `nil` if key does not exist
+hash.fetch(:foo) # raise a `KeyError` exception if key does not exist
+hash.fetch(:foo, 'default value') # get the value if the key exists, 'default value' otherwise
+hash.fetch(:foo) { |key| 'default value'} # get the value if the key exists, otherwise execute supplied block and return the value
+
+# Get hash keys.
+hash.keys
+
+# Get hash values.
+hash.values
+
+# Check if key exists in hash.
+hash.keys.include?('key1')
+
+# Check if hash contains a value.
+hash.values.include?('value1')
+
+# Merge two hashes.
+hash.merge(another_hash) # values from the right takes precedence!
 
