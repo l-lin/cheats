@@ -212,9 +212,15 @@ end
 5.times { |j| print "#{j} " }
 
 # While loop.
+result = []
 while i < 10
   print "#{i} "
   i += 1
+  # We can skip a loop.
+  next if i.even?
+
+  result << i
+
   # We can add a condition to break the loop.
   break if i == 5
 end
@@ -233,6 +239,12 @@ end
 
 # Downto loop.
 3.downto(1) { |j| print "#{j} " }
+
+# Foreach.
+for item in array
+  result << item.upcase
+end
+array.each { |item| result << item.upcase } # better
 
 ; -----------------------------------------------------------------------------
 
