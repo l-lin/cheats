@@ -1,0 +1,32 @@
+% github, pr
+
+# List all Github PRs.
+gh pr list
+
+# Read / View Github PR.
+gh pr view <pr_id> --comments
+
+# Read / View Github PR in the browser.
+gh pr view <pr_id> --web
+
+# Create Github PR.
+gh pr create -t "<pr_title>"
+
+# Merge Github PR.
+gh pr merge --squash --delete-branch
+
+$ pr_id: gh pr list --- --column 1 --delimiter '\s+'
+$ pr_title: git show -s --format=%s $(git log --oneline <target_branch>..HEAD | tail -1 | cut -d' ' -f1)
+$ target_branch: echo -e 'main\nmaster\n'
+
+% github, run
+
+# View Github Action results.
+gh run view --log
+
+# View Github Action failed results only.
+gh run view --log-failed
+
+# Watch Github Action execution.
+gh run watch
+
