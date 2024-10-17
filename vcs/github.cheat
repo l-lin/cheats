@@ -3,8 +3,14 @@
 # List all Github PRs.
 gh pr list
 
+# Read / View current Github PR.
+gh pr view --comments
+
 # Read / View Github PR.
 gh pr view <pr_id> --comments
+
+# Read / View current Github PR in the browser.
+gh pr view --web
 
 # Read / View Github PR in the browser.
 gh pr view <pr_id> --web
