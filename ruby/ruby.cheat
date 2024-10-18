@@ -227,6 +227,9 @@ puts "Score is #{result}"
 # Check if variable exists.
 puts arr if defined? arr
 
+# Pretty print a variable in the console.
+puts variable.inspect
+
 ; -----------------------------------------------------------------------------
 
 % ruby, loop
@@ -338,6 +341,13 @@ assert_equal [1, 'two'], method_with_keyword_arguments
 assert_equal %w[one two], method_with_keyword_arguments(one: 'one')
 assert_equal [1, 2], method_with_keyword_arguments(two: 2)
 
+# Create static method.
+class Foo
+  def self.my_method
+    'You can call Foo.my_method'
+  end
+end
+
 ; -----------------------------------------------------------------------------
 
 % ruby, exception
@@ -399,3 +409,51 @@ file_sandwich('some_file.txt') do |file|
   end
   count
 end
+
+; -----------------------------------------------------------------------------
+
+% ruby, classes
+
+# Create a class with getter accessors.
+class Dog
+  attr_reader :name # getter automatically defined
+
+  def set_name(name)
+    @name = name
+  end
+end
+fido.set_name('Fido')
+puts fido.name # prints 'Fido'
+
+# Create a class with getter and setter accessors.
+class Dog
+  attr_accessor :name # getter & setter automatically defined
+end
+fido.name = 'Fido'
+puts fido.name # prints 'Fido'
+
+# Create a class with overloading constructor (argument must be set, otherwise a `ArgumentError` is raised!).
+class Dog
+  attr_reader :name
+  def initialize(initial_name)
+    @name = initial_name
+  end
+end
+fido = Dog.new('Fido')
+
+# Get variables of an instance.
+class Dog
+  def set_name(name)
+    @name = name
+  end
+end
+fido = Dog.new
+fido.instance_variables # returns []
+fido.set_name('Fido')
+fido.instance_variables # returns [:@name]
+
+# Call getter by reflection.
+fido.instance_variable_get('@name')
+fido.instance_eval("@name")  # string version
+fido.instance_eval { @name } # block version
+
