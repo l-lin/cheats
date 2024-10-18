@@ -178,6 +178,34 @@ element = arr.pop
 
 ; -----------------------------------------------------------------------------
 
+% ruby, array, iteration
+
+# Iterating array with each.
+array = [1, 2, 3]
+sum = 0
+array.each do |item|
+  break if item > 3
+  sum += item
+end
+array.each { |item| sum += item }
+
+# Transform elements of array with collect.
+[1, 2, 3].collect { |item| item + 10 } # returns [11, 12, 13]
+[1, 2, 3].map { |item| item + 10 } # returns [11, 12, 13]
+
+# Filter arrays.
+[1, 2, 3].select { |item| item.even? } # returns [2]
+[1, 2, 3].find_all { |item| item.even? } # returns [2]
+
+# Find first element of array.
+[1, 2, 3].find { |item| item > 2 }
+
+# Inject / Reduce array (inject parameter is the initial value and block is the accumulator).
+[1, 2, 3].inject(0) { |sum, item| sum + item } # returns 6
+[1, 2, 3].inject(1) { |sum, item| sum + item } # returns 7
+
+; -----------------------------------------------------------------------------
+
 % ruby, switch
 
 # Switch statement
@@ -325,3 +353,13 @@ ensure
 end
 
 assert_equal :always_run, result
+
+; -----------------------------------------------------------------------------
+
+% ruby, file
+
+# Read file line by line.
+File.open("some_file.txt") do |file|
+  upcase_lines = file.map { |line| line.strip.upcase }
+end
+
