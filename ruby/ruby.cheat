@@ -363,3 +363,19 @@ File.open("some_file.txt") do |file|
   upcase_lines = file.map { |line| line.strip.upcase }
 end
 
+; -----------------------------------------------------------------------------
+
+% ruby, block
+
+# Create a lambda.
+add_one = lambda { |n| n + 1 }
+add_one = ->(n) { n + 1 } # Alternative syntax
+assert_equal 11, add_one.call(10)
+
+# Create a method with explicit block.
+def method_with_explicit_block(&block)
+  block.call(10)
+end
+add_one = lambda { |n| n + 1 }
+method_with_explicit_block(&add_one)
+method_with_explicit_block { |n| n + 1 }
