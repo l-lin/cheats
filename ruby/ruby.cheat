@@ -348,6 +348,16 @@ class Foo
   end
 end
 
+# Execute a method reflection-like / Send message to object.
+class MessageCatcher
+  def add_a_payload(*args)
+    args
+  end
+end
+mc.add_a_payload(3, 4, nil, 6) # [3, 4, nil, 6]
+mc.send(:add_a_payload, 3, 4, nil, 6) # same
+
+
 ; -----------------------------------------------------------------------------
 
 % ruby, exception
