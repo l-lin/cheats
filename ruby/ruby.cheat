@@ -379,3 +379,23 @@ end
 add_one = lambda { |n| n + 1 }
 method_with_explicit_block(&add_one)
 method_with_explicit_block { |n| n + 1 }
+
+; -----------------------------------------------------------------------------
+
+% ruby, function
+
+# Create sandwich code.
+def file_sandwich(file_name)
+  file = open(file_name)
+  yield(file)
+ensure
+  file.close if file
+end
+
+file_sandwich('some_file.txt') do |file|
+  count = 0
+  while file.gets
+    count += 1
+  end
+  count
+end
