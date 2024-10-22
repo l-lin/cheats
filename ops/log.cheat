@@ -1,10 +1,5 @@
 % log
 
-# Change log level in spring-boot service at runtime
-ssh <host> \
-    'curl -s -X POST "http://localhost:9121/actuator/loggers/<logger>" \
-    -H "Content-Type: application/json" -d "{\"configuredLevel\":\"<level>\"}"'
-
 # Tail logs from remote container with colors with MDC
 ; change colors at: https://colors.sh/
 debug_color='\o033[1;37;40m' \
@@ -41,5 +36,3 @@ ssh <host> 'docker exec <service_name> env' | sort
 $ nb_last_logs: echo -e '10\n'
 $ service_name: ssh <host> 'docker ps -a --format "{{.Names}}"' | grep -v cadvisor
 $ host: cat /etc/hosts | grep -v '#' | awk '{ print $2 }' | sort | uniq
-$ logger: echo -e 'com.example\n'
-$ level: echo -e 'ERROR\nWARN\nINFO\nDEBUG'
