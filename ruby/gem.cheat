@@ -1,0 +1,15 @@
+% ruby, gem
+
+# Get RubyGems environment information.
+gem env
+
+# Install a gem.
+gem install <gem>
+
+# Unsinstall a gem.
+gem unsinstall <installed_gem>
+
+# List installed gems with details.
+gem list --details
+
+$ installed_gem: gem list | awk '{ print $1 }'
