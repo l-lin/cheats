@@ -78,7 +78,10 @@ name = 'John Doe'
 # Find and replace string with pattern / regex.
 'one two-three'.sub(/(t\w*)/) { ::Regexp.last_match(1)[0, 1] } # returns 'one t-three'
 
-# Find and replace all string with pattern / regex.
+# Find and replace all strings with pattern / regex.
+'one two-three'.gsub(/^one /, '') # returns 'two-three'
+
+# Find and replace all strings with pattern / regex using block.
 'one two-three'.gsub(/(t\w*)/) { ::Regexp.last_match(1)[0, 1] } # returns 'one t-t'
 
 ; -----------------------------------------------------------------------------
@@ -467,3 +470,42 @@ fido.instance_variable_get('@name')
 fido.instance_eval("@name")  # string version
 fido.instance_eval { @name } # block version
 
+; -----------------------------------------------------------------------------
+
+% ruby, metaprogramming
+
+# Create instance method at runtime.
+; src: https://www.toptal.com/ruby/ruby-metaprogramming-cooler-than-it-sounds
+class Developer
+  def method_missing method, *args, &block
+    return super method, *args, &block unless method.to_s =~ /^coding_\w+/
+    self.class.send(:define_method, method) do
+      p "writing " + method.to_s.gsub(/^coding_/, '').to_s
+    end
+    self.send method, *args, &block
+  end
+end
+
+developer = Developer.new
+developer.coding_frontend
+developer.coding_backend
+developer.coding_debug
+
+# Create class method at runtime.
+class Developer
+  define_method :frontend do |*my_arg|
+    my_arg.inject(1, :*)
+  end
+
+  class << self
+    def create_backend
+      singleton_class.send(:define_method, "backend") do
+        "Born from the ashes!"
+      end
+    end
+  end
+end
+developer = Developer.new
+Developer.backend # raise NoMethodError
+Developer.create_backend
+Developer.backend
