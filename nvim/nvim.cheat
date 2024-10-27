@@ -68,6 +68,11 @@ set_border_on_lsp()
 # Check where a keymap is used
 :verbose imap <your_keymap>
 
+% nvim, lsp
+
+# Clean up lsp logs.
+echo >! "${HOME}/.local/state/nvim/lsp.log"
+
 % nvim, lsp, snippet
 
 # Add custom LSP server.
