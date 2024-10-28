@@ -6,3 +6,7 @@ bundle install
 # Update ruby gems.
 bundle update
 
+# Create new bundle gem.
+; src: https://bundler.io/v2.5/man/bundle-gem.1.html
+bundle gem <gem_name> --bin --no-coc --no-ext --mit --test=minitest --ci=github --linter=rubocop
+
