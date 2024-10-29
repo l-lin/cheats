@@ -227,7 +227,7 @@ error() {
 
 % bash, script, template
 
-# Bash script template
+# Bash script template / bootstrap / boilerplate
 set -euo pipefail
 
 foo=${FOO:-foo}
