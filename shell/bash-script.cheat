@@ -135,6 +135,11 @@ for i in {<start>..<end>..<step>}; do
   echo $i
 done
 
+# Loop numerical with end as variable
+for i in $(seq 1 "${<end_variable>}"); do
+  echo $i
+done
+
 # Loop from array using for loop
 inputs=('foo' 'bar')
 for i in ${inputs[@]}; do
