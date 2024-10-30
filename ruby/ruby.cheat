@@ -11,7 +11,7 @@ print 'Whatever you want'
 
 ; -----------------------------------------------------------------------------
 
-% ruby, string
+% ruby, string, snippet
 
 # Custom delimiter string to avoid escaping quotes.
 str = %(this string is "surrounded" with delimiter so we don't have to escape quotes)
@@ -86,7 +86,7 @@ name = 'John Doe'
 
 ; -----------------------------------------------------------------------------
 
-% ruby, array
+% ruby, array, snippet
 
 # Create empty array.
 arr = Array.new
@@ -181,7 +181,7 @@ element = arr.pop
 
 ; -----------------------------------------------------------------------------
 
-% ruby, array, iteration
+% ruby, array, iteration, snippet
 
 # Iterating array with each.
 array = [1, 2, 3]
@@ -209,7 +209,7 @@ array.each { |item| sum += item }
 
 ; -----------------------------------------------------------------------------
 
-% ruby, switch
+% ruby, switch, snippet
 
 # Switch statement
 score = 70
@@ -225,7 +225,7 @@ puts "Score is #{result}"
 
 ; -----------------------------------------------------------------------------
 
-% ruby, variable
+% ruby, variable, snippet
 
 # Check if variable exists.
 puts arr if defined? arr
@@ -235,7 +235,7 @@ puts variable.inspect
 
 ; -----------------------------------------------------------------------------
 
-% ruby, loop
+% ruby, loop, snippet
 
 # For loop by index.
 for i in 0..3
@@ -282,7 +282,7 @@ array.each { |item| result << item.upcase } # better
 
 ; -----------------------------------------------------------------------------
 
-% ruby, symbols
+% ruby, symbols, snippet
 
 # Get all symbols.
 Symbol.all_symbols.map { |x| x.to_s }
@@ -295,7 +295,7 @@ Symbol.all_symbols.map { |x| x.to_s }
 
 ; -----------------------------------------------------------------------------
 
-% ruby, hash
+% ruby, hash, snippet
 
 # Create new hash.
 hash = Hash.new # default value will be `nil`
@@ -329,7 +329,7 @@ hash.merge(another_hash) # values from the right takes precedence!
 
 ; -----------------------------------------------------------------------------
 
-% ruby, method
+% ruby, method, snippet
 
 # Create a method with default value.
 def my_method(arg1, arg2 = 2)
@@ -363,7 +363,7 @@ mc.send(:add_a_payload, 3, 4, nil, 6) # same
 
 ; -----------------------------------------------------------------------------
 
-% ruby, exception
+% ruby, exception, snippet
 
 # Handling exception.
 result = nil
@@ -379,7 +379,7 @@ assert_equal :always_run, result
 
 ; -----------------------------------------------------------------------------
 
-% ruby, file
+% ruby, file, snippet
 
 # Read file line by line.
 File.open("some_file.txt") do |file|
@@ -388,7 +388,7 @@ end
 
 ; -----------------------------------------------------------------------------
 
-% ruby, block
+% ruby, block, snippet
 
 # Create a lambda.
 add_one = lambda { |n| n + 1 }
@@ -405,7 +405,7 @@ method_with_explicit_block { |n| n + 1 }
 
 ; -----------------------------------------------------------------------------
 
-% ruby, function
+% ruby, function, snippet
 
 # Create sandwich code.
 def file_sandwich(file_name)
@@ -425,7 +425,7 @@ end
 
 ; -----------------------------------------------------------------------------
 
-% ruby, classes
+% ruby, classes, snippet
 
 # Create a class with getter accessors.
 class Dog
@@ -472,7 +472,7 @@ fido.instance_eval { @name } # block version
 
 ; -----------------------------------------------------------------------------
 
-% ruby, metaprogramming
+% ruby, metaprogramming, snippet
 
 # Create instance method at runtime.
 ; src: https://www.toptal.com/ruby/ruby-metaprogramming-cooler-than-it-sounds

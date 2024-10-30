@@ -1,4 +1,4 @@
-% ruby, minitest
+% ruby, minitest, snippet
 
 # Ensures that test is true.
 assert( test, [msg] )
