@@ -382,8 +382,16 @@ assert_equal :always_run, result
 % ruby, file, snippet
 
 # Read file line by line.
-File.open("some_file.txt") do |file|
+File.open('some_file.txt') do |file|
   upcase_lines = file.map { |line| line.strip.upcase }
+end
+File.open('some_file.txt').each_line |line|
+  puts line.strip.upcase
+end
+
+# Write to file.
+File.open('some_file.txt', 'w') do |file|
+  file.write('some text')
 end
 
 ; -----------------------------------------------------------------------------
