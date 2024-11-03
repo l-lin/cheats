@@ -84,6 +84,9 @@ name = 'John Doe'
 # Find and replace all strings with pattern / regex using block.
 'one two-three'.gsub(/(t\w*)/) { ::Regexp.last_match(1)[0, 1] } # returns 'one t-t'
 
+# Check if a string is blank.
+str.strip.empty?
+
 ; -----------------------------------------------------------------------------
 
 % ruby, array, snippet
@@ -517,3 +520,28 @@ developer = Developer.new
 Developer.backend # raise NoMethodError
 Developer.create_backend
 Developer.backend
+
+; -----------------------------------------------------------------------------
+
+% ruby, kernel, snippet
+
+# Kernel#`: Call shell command and assign standard output to variable.
+; https://docs.ruby-lang.org/en/master/syntax/literals_rdoc.html#label-Percent+Strings 
+value = `echo 'hi'`
+
+cmd = "echo 'hi'"
+value = `#{cmd}`
+
+value = %x(echo hi)
+value = %x[#{cmd}]
+
+# Kernel#system: Execute shell command in a subshell. Returns true if the command was found and run successfully, false otherwise.
+; http://ruby-doc.org/core/Kernel.html#method-i-system
+was_good = system('echo "hi"')
+
+# Kernel#exec: Replace the current process by running the given shell command. Returns none.
+; http://ruby-doc.org/core/Kernel.html#method-i-exec
+exec('echo "hi"')
+
+# Get exit status from shell command called by Kernel#` or Kernel#system.
+$?.exitstatus
