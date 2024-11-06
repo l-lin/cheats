@@ -545,3 +545,24 @@ exec('echo "hi"')
 
 # Get exit status from shell command called by Kernel#` or Kernel#system.
 $?.exitstatus
+
+; -----------------------------------------------------------------------------
+
+% ruby, web, snippet
+
+# Simple web server
+; https://www.rubyguides.com/2016/08/build-your-own-web-server/
+require 'socket'
+server = TCPServer.new('localhost', 8081)
+loop do
+  client = server.accept
+
+  response = <<~RESPONSE
+    HTTP/1.1 200
+    Content-Length: 0
+
+  RESPONSE
+
+  client.write(response)
+  client.close
+end
