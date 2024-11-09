@@ -108,7 +108,7 @@ assert_equal 'John', first_name
 assert_equal %w[Smith III], last_name
 
 # Create array of symbols.
-arr = %i[:foo :bar]
+arr = %i[foo bar]
 
 # Create array of range from 1 to 10 inclusive.
 (1..10).to_a
