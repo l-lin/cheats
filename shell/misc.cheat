@@ -66,3 +66,7 @@ $ sdx: lsblk | grep -E '^sd' | awk '{ print $1 }'
 # Add group to user
 sudo usermod -a -G <group> $(whoami)
 
+# Join multiple lines with a separator.
+<cmd> | paste -sd '<separator>'
+
+$ separator: echo -e ',\n+\n-\n'
