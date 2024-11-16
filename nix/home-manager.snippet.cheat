@@ -1,0 +1,37 @@
+% nix, home-manager, snippet
+
+# Create file to $HOME directory with content.
+home.file."<file_path>".text = ''
+your file ~/<file_path> content.
+'';
+
+# Create symlink to $HOME directory based on existing file.
+home.file."<file_path>".source = ./<file_path>;
+
+# Create recursive symlink to directory in $XDG_CONFIG_HOME.
+xdg.configFile."<directory>" = {
+  source = ./.config/<directory>;
+  recursive = true;
+};
+
+# Create file in $XDG_CONFIG_HOME with content.
+xdg.configFile."<file_path>".text = ''
+your file ~/.config/<file_path> content.
+'';
+
+# Declare env variable.
+home.sessionVariables = {
+  YOUR_ENV_VARIABLE = "your env variable value";
+};
+
+# Get home directory in variable.
+${config.home.homeDirectory}/some/files.txt # interpolates into ~/some/file.txt
+
+# Get XDG config home in variable.
+${config.xdg.configHome}/some/file.txt # interpolates into ~/.config/some/file.txt
+
+# Get XDG data home in variable.
+${config.xdg.dataHome}/some/file.txt # interpolates into ~/.local/share/some/file.txt
+
+# Get XDG cache home in variable.
+${config.xdg.cacheHome}/some/file.txt # interpolates into ~/.cache/some/file.txt
