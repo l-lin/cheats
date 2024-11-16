@@ -3,54 +3,6 @@
 # Open Postgres interactive shell
 pgcli -h <host> -p 5432 -U <user> <db>
 
-% postgres, snippet
-
-# Check last value of a sequence
-SELECT LAST_VALUE FROM <sequence_name>;
-
-# Set sequence value
-SELECT setval('<sequence_name>', <sequence_new_value>, true);
-
-# Generate random values
-WITH r AS (
-  SELECT idx, FLOOR((RANDOM() * 4)) AS x
-  FROM GENERATE_SERIES(1, 10000000) AS idx
-)
-INSERT INTO acquisition
-   SELECT
-     r.idx,
-     CASE r.x
-       WHEN 0 THEN 'foo'
-       WHEN 1 THEN 'bar'
-       WHEN 2 THEN 'popo'
-       WHEN 3 THEN 'toto'
-     END || r.idx
-   FROM r
-
-# Export output to CSV
-\COPY (SELECT * FROM foobar WHERE start_time > '2023-01-01') TO '/output.csv' CSV HEADER;
-
-# Create temporary table
-CREATE TEMPORARY TABLE foobar (
-  id text,
-  start_time timestamp
-);
-
-# Get table size
-SELECT pg_size_pretty(pg_total_relation_size('<table_name>'));
-
-# Get database size
-SELECT pg_size_pretty(pg_database_size('<database_name>'));
-
-# Generate 1 million rows
-INSERT INTO foo(id) SELECT x FROM generate_series(1, 1e6) AS gs(x);
-
-# Generate time interval series
-SELECT * FROM generate_series('2023-01-01'::timestamp, '2023-01-02'::timestamp, '1 hour'::interval);
-
-# Add UUID support in Postgres
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
-
 $ host: cat ${HOME}/.pgpass | awk -F':' '{ print $1 }' | sort | uniq
 $ user: cat ${HOME}/.pgpass | awk -F':' '{ print $4 }' | sort | uniq
 $ db: cat ${HOME}/.pgpass | awk -F':' '{ print $3 }' | sort | uniq

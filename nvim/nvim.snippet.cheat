@@ -1,0 +1,80 @@
+% nvim, lsp, snippet
+
+# Add custom LSP server.
+return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        <language_server> = {},
+      },
+      setup = {
+        <language_server> = function(_, opts)
+          local lspconfig = require("lspconfig")
+          local configs = require("lspconfig.configs")
+
+          if not configs.<language_server> then
+            configs.<language_server> = {
+              default_config = {
+                cmd = { "<cmd>" },
+                filetypes = { "<filetypes" },
+                root_dir = function(fname)
+                  return lspconfig.util.find_git_ancestor(fname)
+                end,
+                settings = {},
+              },
+            }
+          end
+          lspconfig.<language_server>.setup(opts)
+        end,
+      },
+    },
+  },
+}
+
+# Use native LSP server instead of Mason.
+return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        <language_server> = {
+          mason = false,
+          cmd = { <bin_path> },
+        },
+      },
+    },
+  },
+}
+
+# Disable LSP server.
+return {
+  {
+    "neovim/nvim-lspconfig",
+    opts = {
+      servers = {
+        <language_server> = {
+          enabled = false,
+        },
+      },
+    },
+  },
+}
+
+# Add border to LSP windows (hover + signatureHelp)
+local function set_border_on_lsp()
+  vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
+    border = vim.g.border_style,
+  })
+
+  vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, {
+    border = vim.g.border_style,
+  })
+
+  vim.diagnostic.config({
+    float = { border = vim.g.border_style },
+  })
+end
+
+set_border_on_lsp()
+

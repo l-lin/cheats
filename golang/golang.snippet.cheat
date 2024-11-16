@@ -1,0 +1,75 @@
+% golang, snippet
+
+# Golang script to perform concurrent works with Ctrl+C as stop signal
+package main
+
+import (
+  "fmt"
+	"log"
+	"os"
+	"os/signal"
+	"strconv"
+	"sync"
+	"syscall"
+)
+
+var (
+	infoLogger  = log.New(os.Stdout, "INF ", log.Ldate|log.Ltime|log.Lmsgprefix)
+	errorLogger = log.New(os.Stderr, "ERR ", log.Ldate|log.Ltime|log.Lmsgprefix)
+  stopCh = make(chan struct{})
+)
+
+func main() {
+	if len(os.Args) != 2 {
+		errorLogger.Printf("Expected only one argument, which is the number of workers.")
+		os.Exit(1)
+	}
+	nbWorkers, err := strconv.Atoi(os.Args[1])
+	if err != nil {
+		errorLogger.Fatalf("Expected argument '%s' to be a number", os.Args[1])
+	}
+
+	infoLogger.Printf("Execute %d workers", nbWorkers)
+
+	// Create a channel to receive signals
+	signalCh := make(chan os.Signal, 1)
+	signal.Notify(signalCh, os.Interrupt, syscall.SIGTERM)
+
+	// Create a wait group to wait for all goroutines to finish
+	var wg sync.WaitGroup
+
+	// Start goroutines
+	for i := 1; i <= nbWorkers; i++ {
+		wg.Add(1)
+		go doWork(i, &wg)
+	}
+
+	// Wait for Ctrl+C signal
+	<-signalCh
+	fmt.Println("\nCtrl+C signal received. Stopping...")
+
+	// Notify goroutines to stop
+  close(stopCh)
+
+	// Wait for all goroutines to finish
+	wg.Wait()
+
+	infoLogger.Println("All goroutines stopped.")
+}
+
+func doWork(id int, wg *sync.WaitGroup) {
+	defer wg.Done()
+	infoLogger.Printf("Starting worker %d\n", id)
+
+	// Infinite loop
+	for {
+		select {
+		case <-stopCh:
+			infoLogger.Printf("Stopping worker %d\n", id)
+			return
+		default:
+			// Do some work in the loop
+		}
+	}
+}
+

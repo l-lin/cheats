@@ -1,0 +1,23 @@
+% java, snippet, spring
+
+# Test Spring Boot auto-configuration
+; see https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.developing-auto-configuration
+@Test
+void testAutoConfiguration() {
+    // GIVEN
+    final var contextRunner = new ApplicationContextRunner()
+            // import the auto-configuration to test
+            .withConfiguration(AutoConfigurations.of(FoobarAutoConfiguration.class))
+            // import some other configuration that mocks some beans
+            .withConfiguration(UserConfigurations.of(CustomTestConfiguration.class))
+            // remove class from classpath if you want to test @ConditionOnClass
+            .withClassLoader(new FilteredClassLoader(BarFoo.class));
+
+    contextRunner.run(context -> {
+        // WHEN
+        final Foobar foobar = context.getBean(Foobar.class);
+
+        // THEN
+        assertNotNull(foobar);
+    });
+}
