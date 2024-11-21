@@ -1,0 +1,10 @@
+% shell, comm
+
+# Find same lines in two files.
+comm -12 <file_1> <file_2>
+
+# Find same lines in two contents.
+comm -12 <(cat <file_1> | sort | uniq) <(cat <file_2> | sort | uniq)
+
+$ file_1: find . -type f
+$ file_2: find . -type f
