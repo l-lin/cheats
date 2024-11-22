@@ -1,9 +1,9 @@
 % navi
 
-# Open other navi cheatsheets
+# Open other navi cheatsheets.
 navi fn welcome
 
-# Update navi cheatsheet repositories
+# Update navi cheatsheet repositories.
 for f in $(navi info cheats-path)/*/; do \
   folder_name=$(echo ${f} | awk -F'/' '{ print $(NF-1) }') \
   && user=$(echo ${folder_name} | awk -F'__' '{ print $1 }') \
@@ -14,9 +14,9 @@ for f in $(navi info cheats-path)/*/; do \
   && popd; \
 done
 
-# Search in cheat.sh
+# Search in cheat.sh.
 navi --cheatsh <query>
 
-# Use .cheat files from current path
+# Use .cheat files from current path.
 navi -p .
 

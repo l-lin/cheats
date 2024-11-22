@@ -1,0 +1,10 @@
+% navi, snippet
+
+# Variable content using table.
+<variable_name>: echo -e 'host,url\nlocal,http://localhost' | column -s',' '\t' --- --headers 1 --column 2 --delimiter '\s+'
+
+# Variable content getting clipboard.
+<variable_name>: echo -e "$(wl-paste)\n"
+
+$ variable_name: echo -e "$(wl-paste)\n"
+
