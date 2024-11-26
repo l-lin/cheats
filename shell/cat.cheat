@@ -12,3 +12,5 @@ cat --number <input_file>
 # Display line numbers with output and skip empty lines when counting lines
 cat --number-nonblank <input_file>
 
+# Reverse the lines
+tac <input_file>
