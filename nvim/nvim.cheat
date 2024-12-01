@@ -1,55 +1,58 @@
 % nvim, cmd
 
-# Display NVIM base directory documentation
+# Display NVIM base directory documentation.
 :h base-directories
 
-# Display config directory
+# Display config directory.
 :echo stdpath("config")
 
-# Display config directory in Lua
+# Display config directory in Lua.
 :lua print(vim.fn.stdpath("config"))
 
-# Display data directory
+# Display data directory.
 :echo stdpath("data")
 
-# Display data directory in La
+# Display data directory in Lua.
 :lua print(vim.fn.stdpath("data"))
 
-# Display run directory
+# Display run directory.
 :echo stdpath("run")
 
-# Display run directory in Lua
+# Display run directory in Lua.
 :lua print(vim.fn.stdpath("run"))
 
-# Display state directory
+# Display state directory.
 :echo stdpath("state")
 
-# Display state directory in Lua
+# Display state directory in Lua.
 :lua print(vim.fn.stdpath("state"))
 
-# Display state directory
+# Display state directory.
 :echo stdpath("cache")
 
-# Display state directory in Lua
+# Display state directory in Lua.
 :lua print(vim.fn.stdpath("cache"))
 
-# Get filetype
+# Get filetype.
 :set filetype?
 
-# Save all files
+# Save all files.
 :wa
 
-# Save and exit all
+# Save and exit all.
 :xa
 
-# Quit all
+# Quit all.
 :qa
 
-# Debug variable
+# Debug variable.
 :lua vim.inspect(<variable>)
 
-# Check where a keymap is used
+# Check where a keymap is used.
 :verbose imap <your_keymap>
+
+# Open vim help reference.
+:h help-writing
 
 % nvim, lsp
 
