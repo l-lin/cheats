@@ -1,10 +1,35 @@
 % ruby, rails
 
-# Execute rails tests of a file
-bundle exec rails test <test_file>
+# Execute rails tests of a file.
+rails t <test_file>
 
-# Execute rails one test of a file
-bundle exec rails test <test_file>:<line_number>
+# Execute rails one test of a file.
+rails t <test_file>:<line_number>
+
+# Start rails server
+rails s
+
+# Open rails console.
+rails c
+
+# Inspect rails routes.
+rails routes
+
+# Migrate rails db.
+rails db:migrate
+
+# Generate rails model.
+rails generate model <model_name> <field_name>:<field_type>
+
+# Generate rails controller.
+rails generate controller <controller_name>
+
+# Generate rails DB migration.
+rails generate migration <migration_name> <field_name>:<field_type>
 
 $ test_file: find . -type f -name '*_test.rb'
-
+$ model_name: echo -e 'Article\n'
+$ field_name: echo -e 'title\n'
+$ field_type: echo -e 'string\ntext\ninteger\nboolean\nreferences\n'
+$ controller_name: echo -e 'Comments\n'
+$ migration_name: echo -e 'AddStatusToArticles\n'
