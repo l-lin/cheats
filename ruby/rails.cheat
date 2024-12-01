@@ -18,6 +18,9 @@ rails routes
 # Migrate rails db.
 rails db:migrate
 
+# Rollback rails db migration.
+rails db:rollback
+
 # Generate rails model.
 rails generate model <model_name> <field_name>:<field_type>
 
@@ -27,8 +30,14 @@ rails generate controller <controller_name>
 # Generate rails DB migration.
 rails generate migration <migration_name> <field_name>:<field_type>
 
+# Generate rails job.
+rails generate job <job_name> --queue <queue_name>
+
+# Generate rails job on specific queue.
+rails generate job <job_name> --queue <queue_name>
+
 $ test_file: find . -type f -name '*_test.rb'
-$ model_name: echo -e 'Article\n'
+$ model_name: echo -e 'Book::Order\n'
 $ field_name: echo -e 'title\n'
 $ field_type: echo -e 'string\ntext\ninteger\nboolean\nreferences\n'
 $ controller_name: echo -e 'Comments\n'
