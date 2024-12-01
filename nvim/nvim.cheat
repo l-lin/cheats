@@ -54,6 +54,9 @@
 # Open vim help reference.
 :h help-writing
 
+# Update vim HELP documentation (update ~/.config/nvim/doc/tags file).
+:helptags ALL
+
 % nvim, lsp
 
 # Clean up lsp logs.
