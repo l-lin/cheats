@@ -1,0 +1,4 @@
+% shell, column
+
+# CSV to pretty table.
+echo -e 'foo,bar\nanother line here,with another value' | column -s',' -t
