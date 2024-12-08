@@ -1,5 +1,26 @@
-% websocket
+% http, websocket
 
-# Open websocket connection
+# Open websocket connection.
 websocat "wss://<url>" --header "Authorization: Bearer <token>" -vv
 
+% http, load
+
+# HTTP load test.
+<tool> <url> \
+  --http2 \
+  -n <nb_requests> \
+  -c <nb_connections> \
+  -z <duration> \
+  -m <method> \
+  -H <header> \
+  -T <content_type> \
+  -A <accept_header> \
+  -d <request_body>
+
+$ tool: echo -e 'hey\noha'
+$ nb_requests: echo -e '1\n10\n100\n'
+$ nb_connections: echo -e '1\n10\n100\n'
+$ duration: echo -e '10s\n1m\n10m\n'
+$ method: echo -e 'GET\nPOST\nPUT\nDELETE\nPATCH'
+$ content_type: echo -e 'Application/json\n'
+$ accept_header: echo -e 'Application/json\n'
