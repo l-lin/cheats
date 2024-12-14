@@ -36,6 +36,9 @@ rails generate job <job_name> --queue <queue_name>
 # Generate rails job on specific queue.
 rails generate job <job_name> --queue <queue_name>
 
+# Reload Rails console.
+reload!
+
 $ test_file: find . -type f -name '*_test.rb'
 $ model_name: echo -e 'Book::Order\n'
 $ field_name: echo -e 'title\n'

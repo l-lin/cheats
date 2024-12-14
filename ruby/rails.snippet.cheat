@@ -1,3 +1,13 @@
+% ruby, rails
+
+# Get Rails model column names.
+<model>.column_names
+
+# Get Rails model column default.
+<model>.column_default
+
+$ model: echo -e 'Product\n'
+
 % ruby, rails, snippet, minitest
 
 # Test numeric difference between the return value of an expression as a result of what is evaluated in the yielded block.
