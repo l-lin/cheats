@@ -50,6 +50,9 @@ git sparse-checkout init --cone && git checkout main
 ; src: https://github.blog/2020-01-17-bring-your-monorepo-down-to-size-with-sparse-checkout/
 git sparse-checkout set <dir1> <dir2> && git checkout main
 
+# Copy current git branch name to clipboard.
+git rev-parse --abbrev-ref HEAD | wl-copy
+
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ file_path: find . -type f -not -path './.git/*' -not -path './target/*' -not -path './node_modules/*'
