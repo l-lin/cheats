@@ -33,6 +33,9 @@
 # Display state directory in Lua.
 :lua print(vim.fn.stdpath("cache"))
 
+# Display current working directory
+:lua =vim.uv.cwd()
+
 # Get filetype.
 :set filetype?
 
