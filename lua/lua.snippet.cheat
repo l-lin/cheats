@@ -1,0 +1,17 @@
+% lua
+
+# Loop over an array.
+local arr = { "foo", "bar" }
+for index = 1, #arr do
+  print(index, arr[index])
+end
+for index, value in ipairs(arr) do
+  print(index, value)
+end
+
+# Loop over a map.
+local m = { foo: "bar", another_field: 123 }
+for key, value in pairs(m) do
+  print(key, value)
+end
+
