@@ -1,3 +1,20 @@
+% nvim, lsp
+
+# Get Neovim config path ~/.config/nvim.
+vim.fn.stdpath("config")
+
+# Get Neovim data path ~/.local/share/nvim.
+vim.fn.stdpath("data")
+
+# Get Neovim state path ~/.local/state/nvim.
+vim.fn.stdpath("state")
+
+# Get Neovim cache path ~/.cache/nvim.
+vim.fn.stdpath("cache")
+
+# Get current working directory.
+vim.uv.cwd()
+
 % nvim, lsp, snippet
 
 # Add custom LSP server.
