@@ -15,6 +15,9 @@ vim.fn.stdpath("cache")
 # Get current working directory.
 vim.uv.cwd()
 
+# Extend a list (this will mutate dst!).
+vim.extend(dst, src)
+
 % nvim, lsp, snippet
 
 # Add custom LSP server.
