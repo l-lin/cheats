@@ -7,3 +7,5 @@ files_to_delete=('.settings' '.project' '.classpath' '.factorypath') \
     find . -type f -name "${file_to_delete}" -exec rm {} \;
   done
 
+# Re-generate Java LSP files.
+mvn eclipse:clean eclipse:eclipse
