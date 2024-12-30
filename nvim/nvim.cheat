@@ -60,6 +60,27 @@
 # Update vim HELP documentation (update ~/.config/nvim/doc/tags file).
 :helptags ALL
 
+# Delete all blank lines.
+:g/^\s*$/d
+
+# Delete lines containing text.
+:g/<text>/d
+
+# Delete lines NOT containing text.
+:g!/<text>/d
+
+# Delete lines NOT containing text.
+:v/<text>/d
+
+# Copy lines containing text to EOF.
+:g/<text>/t$
+
+# Move lines containing text to EOF.
+:g/<text>/m$
+
+# Remove duplicate lines.
+:sort | %!uniq -u
+
 % nvim, lsp
 
 # Clean up lsp logs.
