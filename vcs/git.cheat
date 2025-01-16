@@ -69,9 +69,13 @@ git worktree list
 # Delete a worktree.
 git worktree remove <worktree_path>
 
+# Get all git commits between two commits.
+git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | wl-copy
+
 $ branch_name: git branch -a | grep 'remotes/origin' | sed 's~remotes/origin/~~' | grep -v 'HEAD ->' | sed 's/ //g'
 $ sanitized_branch_name: echo -e "<branch_name>" | sed 's~/~-~g'
 $ new_worktree_path: echo -n "../<folder_name>-<sanitized_branch_name>"
 $ folder_name: echo -n "${PWD##*/}"
 $ worktree_path: git worktree list --- --column 1 --delimiter '\s\s+'
-
+$ start_git_commit: echo -e "$(wl-paste)\n"
+$ end_git_commit: echo -e 'HEAD\n'
