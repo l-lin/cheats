@@ -360,6 +360,11 @@ end
 mc.add_a_payload(3, 4, nil, 6) # [3, 4, nil, 6]
 mc.send(:add_a_payload, 3, 4, nil, 6) # same
 
+# Get all class methods.
+<class_name>.methods
+
+# Find source / origin of a class method.
+<class_name>.method(:<method_name>).source_location
 
 ; -----------------------------------------------------------------------------
 
