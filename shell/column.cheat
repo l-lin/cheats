@@ -2,3 +2,6 @@
 
 # CSV to pretty table.
 echo -e 'foo,bar\nanother line here,with another value' | column -s',' -t
+
+# Transform CSV to JSON.
+echo -e 'foo,bar\nanother line here,with another value' | column -s',' -t -N 'column1,column2' --json
