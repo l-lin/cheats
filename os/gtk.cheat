@@ -1,0 +1,4 @@
+% gtk
+
+# Debug GTK.
+GTK_DEBUG=interactive <app_using_gtk>
