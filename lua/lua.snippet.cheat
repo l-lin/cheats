@@ -15,3 +15,5 @@ for key, value in pairs(m) do
   print(key, value)
 end
 
+# Get OS env variable
+os.gentent("<env_name>")
