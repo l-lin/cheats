@@ -45,3 +45,6 @@ SELECT * FROM generate_series('2023-01-01'::timestamp, '2023-01-02'::timestamp, 
 
 # Add UUID support in Postgres
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
+# Generate 1 million uuids
+SELECT uuid_generate_v4() FROM generate_series(1, 1e6);
