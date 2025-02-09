@@ -1,0 +1,4 @@
+% tridactyl
+
+# Get keymaps.
+:viewconfig --default
