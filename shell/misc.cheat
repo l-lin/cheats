@@ -33,6 +33,9 @@ done
 # Source file if it exists.
 [[ ! "<file>" ]] || source "<file>"
 
+# Logout.
+pkill -kill -u ${USER}
+
 % shell, misc, rep
 
 # Replace word in text (add -w to execute)
