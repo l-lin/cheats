@@ -33,6 +33,9 @@ done
 # Source file if it exists.
 [[ ! "<file>" ]] || source "<file>"
 
+# List all available fonts.
+fc-list
+
 # Logout.
 pkill -kill -u ${USER}
 
