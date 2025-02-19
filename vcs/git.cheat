@@ -56,7 +56,7 @@ git sparse-checkout init --cone && git checkout main
 git sparse-checkout set <dir1> <dir2> && git checkout main
 
 # Copy current git branch name to clipboard.
-git rev-parse --abbrev-ref HEAD | wl-copy
+git rev-parse --abbrev-ref HEAD | xsel -b
 
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
@@ -72,7 +72,7 @@ git blame <start_line>:<end_line> <file_path>
 @ git, common
 
 # Get all git commits between two commits.
-git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | wl-copy
+git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | xsel -b
 
 # Get log history of specific file lines.
 git log -L <start_line>,<end_line>:<file_path>
