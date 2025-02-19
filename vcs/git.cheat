@@ -1,4 +1,9 @@
+% git, common
+
+$ file_path: find . -type f -not -path './.git/*' -not -path './target/*' -not -path './node_modules/*'
+
 % git
+@ git, common
 
 # Rewrite git history
 git rebase -i "HEAD~$(git cherry -v <target_branch> $(git rev-parse --abbrev-ref HEAD) | wc -l)"
@@ -55,8 +60,34 @@ git rev-parse --abbrev-ref HEAD | wl-copy
 
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
-$ file_path: find . -type f -not -path './.git/*' -not -path './target/*' -not -path './node_modules/*'
 $ jira_id: echo -e "$(wl-paste)\n"
+
+% git, blame
+@ git, common
+
+# Git blame specific file lines.
+git blame <start_line>:<end_line> <file_path>
+
+% git, log
+@ git, common
+
+# Get all git commits between two commits.
+git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | wl-copy
+
+# Get log history of specific file lines.
+git log -L <start_line>,<end_line>:<file_path>
+
+# Get log history of commits whose content has the search word on specific file.
+git log -L :<search_word>:<file_path>
+
+# Get log history of commits whose content has the search word.
+git log -S <search_word> -p
+
+# Cache commit history for faster git log.
+git commit-graph write
+
+$ start_git_commit: echo -e "$(wl-paste)\n"
+$ end_git_commit: echo -e 'HEAD\n'
 
 % git, worktree
 
@@ -69,13 +100,15 @@ git worktree list
 # Delete a worktree.
 git worktree remove <worktree_path>
 
-# Get all git commits between two commits.
-git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | wl-copy
-
 $ branch_name: git branch -a | grep 'remotes/origin' | sed 's~remotes/origin/~~' | grep -v 'HEAD ->' | sed 's/ //g'
 $ sanitized_branch_name: echo -e "<branch_name>" | sed 's~/~-~g'
 $ new_worktree_path: echo -n "../<folder_name>-<sanitized_branch_name>"
 $ folder_name: echo -n "${PWD##*/}"
 $ worktree_path: git worktree list --- --column 1 --delimiter '\s\s+'
-$ start_git_commit: echo -e "$(wl-paste)\n"
-$ end_git_commit: echo -e 'HEAD\n'
+
+$ git, maintenance
+
+# Start new git maintenance to accelerate git operations.
+; This will write in .gitconfig file. So you might want to edit the file yourself.
+git maintenance start
+
