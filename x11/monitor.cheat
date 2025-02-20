@@ -1,0 +1,4 @@
+% x11, monitor
+
+# Find X11 window class, name and role (after executing, click on the window).
+xprop | grep "WM_CLASS\|WM_NAME\|WM_WINDOW_ROLE"
