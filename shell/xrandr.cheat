@@ -7,7 +7,7 @@ xrandr --output "<monitor>" --off
 xrandr --output "<monitor>" --auto
 
 # Configure monitor to be side-by-side with another monitor.
-xrandr --output "<monitor>" --<monitor_position>-of "<other_monitor>"
+xrandr --output "<monitor>" --auto --<monitor_position>-of "<other_monitor>"
 
 # List all connected monitors.
 xrandr | grep " connected " | awk '{ print$1 }'
