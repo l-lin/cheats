@@ -16,4 +16,24 @@ for key, value in pairs(m) do
 end
 
 # Get OS env variable
-os.gentent("<env_name>")
+os.getenv("<env_name>")
+
+# Execute shell command and read stdout.
+local stdout = io.popen("<shell_cmd>")
+if not stdout then
+  return
+end
+while true do
+  local line = stdout:read("*line")
+  if not line then
+    break
+  end
+end
+stdout:close()
+
+# Read file.
+local file = io.open('<file_path>', 'r')
+if not file then
+  return false
+end
+local file_content = file:read('*all')
