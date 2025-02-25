@@ -49,8 +49,11 @@ fi
 
 % shell, misc
 
-# Change capslock to ctrl
+# Change capslock to ctrl.
 setxkbmap -layout us -option ctrl:nocaps -variant altgr-intl
+
+# Revert capslock.
+setxkbmap -layout us -option -variant altgr-intl
 
 # Create a fake file with a certain size (example for file size: 5K)
 fallocate -l <size> <output_file>
