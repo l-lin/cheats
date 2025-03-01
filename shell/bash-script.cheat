@@ -205,6 +205,27 @@ a=$([ "$b" == 5 ] && echo "$c" || echo "$d")
 
 # -----------------------------------------------------------------
 
+% bash, script, error, log
+
+# Log errors to file.
+LOG_FILE="/var/log/myscript.log"
+log_error() {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - Error occurred. Exiting." >> "${LOG_FILE}"
+}
+function log_info() {
+  echo "$(date '+%Y-%m-%d %H:%M:%S') - $1" >> "${LOG_FILE}"
+}
+trap log_error ERR
+log_info "Script started."
+echo "This will cause an error"
+non_existent_command
+
+# Display log and write to log file.
+LOG_FILE="/var/log/myscript.log"
+echo "Starting script..." | tee -a "${LOG_FILE}"
+
+# -----------------------------------------------------------------
+
 % bash, script, logging
 
 # Pretty logging
