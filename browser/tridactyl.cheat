@@ -2,3 +2,9 @@
 
 # Get keymaps.
 :viewconfig --default
+
+# Move tab to new window.
+:tabdetach
+
+# Move tab back to window.
+:tabpush
