@@ -72,7 +72,7 @@ git blame <start_line>:<end_line> <file_path>
 @ git, common
 
 # Get all git commits between two commits.
-git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | awk '{ print "-" $0 }' | xsel -b
+git log --pretty=format:"%h %s" <start_git_commit>..<end_git_commit> | awk '{ print "- " $0 }' | xsel -b
 
 # Get log history of specific file lines.
 git log -L <start_line>,<end_line>:<file_path>
