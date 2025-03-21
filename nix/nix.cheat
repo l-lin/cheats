@@ -76,4 +76,4 @@ steam-run <binary_file>
 nix-alien <binary_file>
 
 $ binary_file: find . -maxdepth 1 -type f | sed 's~./~~'
-$ library: echo -e "$(wl-paste)\n"
+$ library: echo -e "$(xsel -b)\n"

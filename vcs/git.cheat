@@ -60,7 +60,7 @@ git rev-parse --abbrev-ref HEAD | xsel -b
 
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
-$ jira_id: echo -e "$(wl-paste)\n"
+$ jira_id: echo -e "$(xsel -b)\n"
 
 % git, blame
 @ git, common
@@ -86,7 +86,7 @@ git log -S <search_word> -p
 # Cache commit history for faster git log.
 git commit-graph write
 
-$ start_git_commit: echo -e "$(wl-paste)\n"
+$ start_git_commit: echo -e "$(xsel -b)\n"
 $ end_git_commit: echo -e 'HEAD\n'
 
 % git, worktree
