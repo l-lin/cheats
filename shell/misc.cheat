@@ -75,4 +75,8 @@ sudo usermod -a -G <group> $(whoami)
 # Join multiple lines with a separator.
 <cmd> | paste -sd '<separator>'
 
+# Join all lines from a file with a separator.
+paste -sd '<separator>' <file>
+
 $ separator: echo -e ',\n+\n-\n'
+$ file: ls -p *
