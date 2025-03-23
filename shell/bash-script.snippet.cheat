@@ -1,4 +1,4 @@
-% bash, script
+% bash, script, snippet
 
 # Print error messages to stderr
 <cmd> || echo 'cmd failed' >/dev/stderr
@@ -21,7 +21,7 @@ check_process() {
 
 # -----------------------------------------------------------------
 
-% bash, script, string manipulation
+% bash, script, snippet, string manipulation
 
 # Replace first match pattern in String
 echo "${<variable>/<pattern>/<replacement>}"
@@ -58,7 +58,7 @@ echo "${<variable>##*<pattern>}"
 
 # -----------------------------------------------------------------
 
-% bash, script, array
+% bash, script, snippet, array
 
 # Create an array
 array=('first element' 'second element')
@@ -107,7 +107,7 @@ unset array
 
 # -----------------------------------------------------------------
 
-% bash, script, map
+% bash, script, snippet, map
 
 # Declare map
 declare -A map=([john]=75 [doe]=82 [ann]=83 [ava]=72)
@@ -128,7 +128,7 @@ unset "map[${i}]"
 
 # -----------------------------------------------------------------
 
-% bash, script, loop
+% bash, script, snippet, loop
 
 # Loop numerical
 for i in {<start>..<end>..<step>}; do
@@ -205,7 +205,7 @@ a=$([ "$b" == 5 ] && echo "$c" || echo "$d")
 
 # -----------------------------------------------------------------
 
-% bash, script, error, log
+% bash, script, snippet, error, log
 
 # Log errors to file.
 LOG_FILE="/var/log/myscript.log"
@@ -225,8 +225,21 @@ LOG_FILE="/var/log/myscript.log"
 echo "Starting script..." | tee -a "${LOG_FILE}"
 
 # -----------------------------------------------------------------
+% bash, script, snippet, binary
 
-% bash, script, logging
+# Check if program / application / binary is available in PATH.
+if type <bin>>/dev/null 2>&1; then
+  echo "<bin> is available"
+fi
+
+# Check if program / application / binary is NOT available in PATH.
+if ! type <bin>>/dev/null 2>&1; then
+  echo "<bin> is NOT available"
+fi
+
+# -----------------------------------------------------------------
+
+% bash, script, snippet, logging
 
 # Pretty logging
 blue='\e[1;30;44m'
