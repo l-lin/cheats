@@ -18,6 +18,18 @@ vim.uv.cwd()
 # Extend a list (this will mutate dst!).
 vim.extend(dst, src)
 
+# Get relative file path.
+vim.fn.expand("%:.")
+
+# Get absolute file path.
+vim.fn.expand("%:p")
+
+# Get filename.
+vim.fn.expand("%:t")
+
+# Get current line.
+vim.fn.line(".")
+
 % nvim, lsp, snippet
 
 # Add custom LSP server.
