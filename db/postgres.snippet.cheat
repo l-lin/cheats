@@ -1,5 +1,8 @@
 % postgres, snippet
 
+# Disable pager / enable wrap.
+\pset pager off
+
 # Check last value of a sequence
 SELECT LAST_VALUE FROM <sequence_name>;
 
