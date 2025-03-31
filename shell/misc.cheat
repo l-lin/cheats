@@ -3,6 +3,9 @@
 # Generate random UUID
 uuidgen | tr -d '\r\n'
 
+# Show network TUI (wifi, wired).
+nmtui
+
 # Show Wifi
 nmcli device wifi
 
