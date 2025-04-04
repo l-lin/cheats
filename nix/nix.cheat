@@ -76,4 +76,4 @@ steam-run <binary_file>
 nix-alien <binary_file>
 
 $ binary_file: find . -maxdepth 1 -type f | sed 's~./~~'
-$ library: echo -e "$(xsel -b)\n"
+$ library: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"

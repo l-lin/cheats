@@ -24,7 +24,7 @@ aws --profile <profile> s3 ls s3://<bucket>/<key>
 aws --profile <profile> s3 cp s3://<bucket>/<key> .
 
 $ bucket: aws --profile <profile> s3 ls | awk '{ print $3 }'
-$ key: echo -e "$(xsel -b)\n"
+$ key: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
 
 # -----------------------------------------------------------------
 
