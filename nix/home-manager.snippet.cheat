@@ -35,3 +35,11 @@ ${config.xdg.dataHome}/some/file.txt # interpolates into ~/.local/share/some/fil
 
 # Get XDG cache home in variable.
 ${config.xdg.cacheHome}/some/file.txt # interpolates into ~/.cache/some/file.txt
+
+# Create symlink depending on whether the env is Darwin / macOS or not.
+xdg.configFile = pkgs.lib.mkIf (!pkgs.stdenv.isDarwin) {
+  "numbat/config.toml".source = ./.config/numbat/config.toml;
+};
+home.file = pkgs.lib.mkIf pkgs.stdenv.isDarwin {
+  "Library/Application Support/numbat/config.toml".source = ./.config/numbat/config.toml;
+};
