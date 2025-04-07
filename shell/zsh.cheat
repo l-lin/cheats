@@ -1,0 +1,4 @@
+% zsh
+
+# Debug zsh execution.
+zsh -xlic exit 2>&1 | grep -E 'zshenv|zprofile|zshrc|zlogin'
