@@ -1,0 +1,11 @@
+% colima
+
+# Start colima.
+colima start --network-address
+
+# Stop colima.
+colima stop
+
+# Get colima docker socket location
+; src: https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#docker-socket-location
+colima status
