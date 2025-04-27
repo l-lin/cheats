@@ -1,85 +1,91 @@
 % nvim, cmd
 
 # Display NVIM base directory documentation.
-:h base-directories
+h base-directories
 
 # Display config directory.
-:echo stdpath("config")
+echo stdpath("config")
 
-# Display config directory in Lua.
-:lua print(vim.fn.stdpath("config"))
+# Display config directory in Lua ~/.config/nvim.
+lua print(vim.fn.stdpath("config"))
 
 # Display data directory.
-:echo stdpath("data")
+echo stdpath("data")
 
-# Display data directory in Lua.
-:lua print(vim.fn.stdpath("data"))
+# Display data directory in Lua ~/.local/share/nvim.
+lua print(vim.fn.stdpath("data"))
 
 # Display run directory.
-:echo stdpath("run")
+echo stdpath("run")
 
 # Display run directory in Lua.
-:lua print(vim.fn.stdpath("run"))
+lua print(vim.fn.stdpath("run"))
 
 # Display state directory.
-:echo stdpath("state")
+echo stdpath("state")
 
-# Display state directory in Lua.
-:lua print(vim.fn.stdpath("state"))
+# Display state directory in Lua ~/.local/state/nvim.
+lua print(vim.fn.stdpath("state"))
 
 # Display state directory.
-:echo stdpath("cache")
+echo stdpath("cache")
 
-# Display state directory in Lua.
-:lua print(vim.fn.stdpath("cache"))
+# Display state directory in Lua ~/.cache/nvi.
+lua print(vim.fn.stdpath("cache"))
 
 # Display current working directory
-:lua =vim.uv.cwd()
+lua =vim.uv.cwd()
 
 # Get filetype.
-:set filetype?
+set filetype?
 
 # Save all files.
-:wa
+wa
 
 # Save and exit all.
-:xa
+xa
 
 # Quit all.
-:qa
+qa
 
 # Debug variable.
-:lua vim.inspect(<variable>)
+lua vim.inspect(<variable>)
 
 # Check where a keymap is used.
-:verbose imap <your_keymap>
+verbose imap <your_keymap>
 
 # Open vim help reference.
-:h help-writing
+h help-writing
 
 # Update vim HELP documentation (update ~/.config/nvim/doc/tags file).
-:helptags ALL
+helptags ALL
 
 # Delete all blank lines.
-:g/^\s*$/d
+g/^\s*$/d
 
 # Delete lines containing text.
-:g/<text>/d
+g/<text>/d
 
 # Delete lines NOT containing text.
-:g!/<text>/d
+g!/<text>/d
 
 # Delete lines NOT containing text.
-:v/<text>/d
+v/<text>/d
 
 # Copy lines containing text to EOF.
-:g/<text>/t$
+g/<text>/t$
 
 # Move lines containing text to EOF.
-:g/<text>/m$
+g/<text>/m$
 
 # Remove duplicate lines.
-:sort | %!uniq -u
+sort | %!uniq -u
+
+# Diff view with two opened windows.
+windo diffthis
+
+# Print output of shell command.
+r!<command>
 
 % nvim, lsp
 
