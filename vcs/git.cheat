@@ -24,7 +24,10 @@ git log -p -G'<pattern>' <file_path>
 git log --diff-filter=D --summary | grep delete
 
 # Display full history for a given file
-git log --oneline --graph --all --full-history -- <file_path>
+git log --oneline --graph --follow --all --full-history -- <file_path>
+
+# Display log history with all changes
+git log -p <rev>
 
 # Find 10 most modified files
 git log --format=format: --name-only | grep -v '^$' | sort | uniq -c | sort -rg | head -10
