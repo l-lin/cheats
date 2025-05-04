@@ -17,21 +17,6 @@ git add -A && git commit -m "<commit_type>($(git rev-parse --abbrev-ref HEAD | a
 # Git push remote
 git push -u origin $(git rev-parse --abbrev-ref HEAD)
 
-# Grep logs
-git log -p -G'<pattern>' <file_path>
-
-# Find all files that were deleted
-git log --diff-filter=D --summary | grep delete
-
-# Display full history for a given file
-git log --oneline --graph --follow --all --full-history -- <file_path>
-
-# Display log history with all changes
-git log -p <rev>
-
-# Find 10 most modified files
-git log --format=format: --name-only | grep -v '^$' | sort | uniq -c | sort -rg | head -10
-
 # Pattern to search on revisions
 git show :/<pattern>
 
@@ -86,8 +71,20 @@ git log -L :<search_word>:<file_path>
 # Get log history of commits whose content has the search word.
 git log -S <search_word> -p
 
-# Cache commit history for faster git log.
-git commit-graph write
+# Grep logs
+git log -p -G'<pattern>' <file_path>
+
+# Find all files that were deleted
+git log --diff-filter=D --summary | grep delete
+
+# Display full history for a given file
+git log --oneline --graph --follow --all --full-history -- <file_path>
+
+# Display log history with all changes
+git log -p <rev>
+
+# Find 10 most modified files
+git log --format=format: --name-only | grep -v '^$' | sort | uniq -c | sort -rg | head -10
 
 $ start_git_commit: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
 $ end_git_commit: echo -e 'HEAD\n'
@@ -114,4 +111,12 @@ $ git, maintenance
 # Start new git maintenance to accelerate git operations.
 ; This will write in .gitconfig file. So you might want to edit the file yourself.
 git maintenance start
+
+# Cache commit history for faster git log.
+git commit-graph write
+
+# Set git project for faster git status
+; ⚠️ Beware, it's using a single process per repository!
+; src: https://blog.gitbutler.com/how-git-core-devs-configure-git/
+git config core.fsmonitor true && git config core.untrackedCache true
 
