@@ -91,8 +91,11 @@ $ end_git_commit: echo -e 'HEAD\n'
 
 % git, worktree
 
-# Create a new worktree.
+# Create a new worktree from an existing branch.
 git worktree add <new_worktree_path> <branch_name>
+
+# Create a new worktree.
+git worktree add <new_worktree_path> -b <branch_name>
 
 # List all worktrees.
 git worktree list
