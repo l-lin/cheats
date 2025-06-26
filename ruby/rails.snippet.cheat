@@ -48,3 +48,6 @@ assert_queries_match(pattern, count: nil, include_schema: false, &block)
 
 # Asserts that &block generates no SQL queries that match the pattern.
 assert_no_queries_match(pattern, &block)
+
+# Enable logs.
+ActiveRecord::Base.logger = Logger.new(STDOUT)
