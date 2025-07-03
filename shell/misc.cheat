@@ -42,6 +42,10 @@ fc-list
 # Logout.
 pkill -kill -u ${USER}
 
+# Disable shell history - start sensitive shell session.
+; src: https://www.jvt.me/posts/2025/06/26/zsh-no-history/
+unset HISTFILE && export HISTSIZE=0 && export SAVEHIST=0
+
 % shell, misc, rep
 
 # Replace word in text (add -w to execute)
