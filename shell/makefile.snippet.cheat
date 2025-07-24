@@ -18,7 +18,7 @@ hello:
 	fi
 	@echo -e "${BLUE} I ${NC} Hello, ${AUDIENCE}."
 
-## watch: watch source files
+ ## watch: watch source files
 watch:
 	@echo "  > Watching files..."
 	@if !type "entr" > /dev/null 2>&1; then \
