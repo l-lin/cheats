@@ -2,3 +2,6 @@
 
 # Debug zsh execution.
 zsh -xlic exit 2>&1 | grep -E 'zshenv|zprofile|zshrc|zlogin'
+
+# Profile/Benchmark zsh startup time
+zsh -c "zmodload zsh/zprof; source ~/.config/zsh/.zshrc; zprof"
