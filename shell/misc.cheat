@@ -1,7 +1,7 @@
 % shell, misc
 
 # Generate random UUID
-uuidgen | tr -d '\r\n'
+uuidgen | awk '{ print tolower($0)}' | tr -d '\r\n'
 
 # Show network TUI (wifi, wired).
 nmtui
