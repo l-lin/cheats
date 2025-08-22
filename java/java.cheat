@@ -4,7 +4,7 @@
 files_to_delete=('.settings' '.project' '.classpath' '.factorypath') \
   && rm -rf ~/.cache/nvim/jdtls/workspaces/${PWD##*/}/ \
   && for file_to_delete in ${files_to_delete[@]}; do \
-    find . -type f -name "${file_to_delete}" -exec rm {} \;
+    find . -type f -name "${file_to_delete}" -exec rm -rf {} \;
   done
 
 # Re-generate Java LSP files.
