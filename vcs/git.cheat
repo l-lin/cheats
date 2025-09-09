@@ -105,7 +105,7 @@ git worktree remove <worktree_path>
 
 $ branch_name: git branch -a | grep 'remotes/origin' | sed 's~remotes/origin/~~' | grep -v 'HEAD ->' | sed 's/ //g'
 $ sanitized_branch_name: echo -e "<branch_name>" | sed 's~/~-~g'
-$ new_worktree_path: echo -n "./.worktree/<folder_name>-<sanitized_branch_name>"
+$ new_worktree_path: echo -n "./.worktree/<sanitized_branch_name>"
 $ folder_name: echo -n "${PWD##*/}"
 $ worktree_path: git worktree list --- --column 1 --delimiter '\s\s+'
 
