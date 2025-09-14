@@ -1,7 +1,7 @@
 % shell, date
 
 # Convert epoch timestamp to human readable
-date -u --date=@$((<timestamp_in_milli>/1000)).$((<timestamp_in_milli>%1000)) "+%Y-%m-%dT%H:%M:%S.%3NZ"
+date -r <timestamp_in_seconds> "+%Y-%m-%dT%H:%M:%S.%3NZ"
 
 # Convert human readable to epoch timestamp in second
 date -d '<timestamp_in_iso_8601>' +%s%3N
@@ -15,6 +15,6 @@ date +%s%3N
 # Get duration in second to human readable
 date -ud "@$<duration_in_sec>" +"$(( $<duration_in_sec>/3600/24 ))d %Hh %Mm %Ss"
 
-$ timestamp_in_milli: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
+$ timestamp_in_seconds: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
 $ timestamp_in_iso_8601: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
 $ duration_in_sec: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
