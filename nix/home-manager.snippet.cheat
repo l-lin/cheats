@@ -8,6 +8,9 @@ your file ~/<file_path> content.
 # Create symlink to $HOME directory based on existing file.
 home.file."<file_path>".source = ./<file_path>;
 
+# Create symlink in $XDG_CONFIG_HOME.
+xdg.configFile."<file_path>".source = '.config/<file_path>;
+
 # Create recursive symlink to directory in $XDG_CONFIG_HOME.
 xdg.configFile."<directory>" = {
   source = ./.config/<directory>;
