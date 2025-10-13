@@ -9,3 +9,6 @@ colima stop
 # Get colima docker socket location
 ; src: https://github.com/abiosoft/colima/blob/main/docs/FAQ.md#docker-socket-location
 colima status
+
+# Delete corrupted colima
+colima delete -f && limactl disk unlock colima && rm -rf ~/.colima/_lima/_disks/colima
