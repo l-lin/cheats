@@ -1,7 +1,7 @@
 % colima
 
 # Start colima.
-colima start --network-address
+colima start --network-address --memory 6
 
 # Stop colima.
 colima stop
