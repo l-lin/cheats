@@ -3,4 +3,4 @@
 # Start claude-code with MCP
 claude --mcp-config <mcp_server>
 
-$ mcp_server: ls $HOME/.claude/mcp-*.json | sed "s|$HOME|~|g"
+$ mcp_server: ls $HOME/.claude/mcp/*.json | sed "s|$HOME|~|g"
