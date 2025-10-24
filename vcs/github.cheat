@@ -24,6 +24,9 @@ gh pr create -t "<pr_title>" && gh pr view --json url -q '.url' | ${COPY_TO_CLIP
 # Merge Github PR.
 gh pr merge --squash --delete-branch
 
+# Watch Github Actions on PR
+gh pr checks --interval 30 --watch
+
 $ pr_id: gh pr list --- --column 1 --delimiter '\s+'
 $ pr_title: git show -s --format=%s $(git log --oneline <main_target_branch>..HEAD | head -1 | cut -d' ' -f1)
 $ main_target_branch: git branch | rg '(main|master)' -w | sed 's/*//' | sed 's/+//' | sed 's/\s//g'
