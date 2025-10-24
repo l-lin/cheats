@@ -9,6 +9,9 @@ date -d '<timestamp_in_iso_8601>' +%s%3N
 # Get current timestamp in human readable
 date -u "+%Y-%m-%dT%H:%M:%S.%3NZ"
 
+# Get current date in human readable
+date -u "+%Y-%m-%d"
+
 # Get current timestamp in second from epoch timestamp
 date +%s%3N
 
