@@ -1,3 +1,8 @@
+% nvim
+
+# Open NeoVim in bare mode
+nvim -u NONE -i NONE
+
 % nvim, cmd
 
 # Display NVIM base directory documentation.
