@@ -4,3 +4,14 @@
 # Convert to camel case
 sed -e 's/\(.*\)/\L\1/' <input_file>
 
+# Print line N
+sed -n <line_number>p <input_file>
+
+# Delete line N
+sed <line_number>d <input_file>
+
+# delete the first 10 lines
+sed '1,10d' <input_file>
+
+# delete ALL blank lines
+sed '/^$/d' <input_file>
