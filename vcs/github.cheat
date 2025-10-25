@@ -1,3 +1,8 @@
+% github, repo
+
+# Open / Read / View Github repository in the browser.
+gh repo view --web
+
 % github, pr
 
 # List all Github PRs.
@@ -9,10 +14,10 @@ gh pr view --comments
 # Read / View Github PR.
 gh pr view <pr_id> --comments
 
-# Read / View current Github PR in the browser.
+# Open / Read / View current Github PR in the browser.
 gh pr view --web
 
-# Read / View Github PR in the browser.
+# Open / Read / View Github PR in the browser.
 gh pr view <pr_id> --web
 
 # Get Github PR URL.
