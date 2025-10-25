@@ -24,7 +24,7 @@ gh pr view <pr_id> --web
 gh pr view --json url -q '.url' | cat
 
 # Create Github PR and copy PR url to clipboard.
-gh pr create -t "<pr_title>" && gh pr view --json url -q '.url' | ${COPY_TO_CLIPBOARD}
+gh pr create -t "<pr_title>" && gh pr view --json url -q '.url' | copy
 
 # Merge Github PR.
 gh pr merge --squash --delete-branch
