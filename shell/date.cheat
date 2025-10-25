@@ -18,6 +18,6 @@ date +%s%3N
 # Get duration in second to human readable
 date -ud "@$<duration_in_sec>" +"$(( $<duration_in_sec>/3600/24 ))d %Hh %Mm %Ss"
 
-$ timestamp_in_seconds: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
-$ timestamp_in_iso_8601: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
-$ duration_in_sec: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
+$ timestamp_in_seconds: echo -e "$(pasta)\n"
+$ timestamp_in_iso_8601: echo -e "$(pasta)\n"
+$ duration_in_sec: echo -e "$(pasta)\n"
