@@ -46,6 +46,9 @@ git sparse-checkout set <dir1> <dir2> && git checkout main
 # Copy current git branch name to clipboard.
 git rev-parse --abbrev-ref HEAD | copy"
 
+# Delete all local branches.
+git branch | grep -v "^\*" | xargs git branch -D
+
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ jira_id: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
