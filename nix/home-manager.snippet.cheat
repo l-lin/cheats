@@ -46,3 +46,9 @@ xdg.configFile = pkgs.lib.mkIf (!pkgs.stdenv.isDarwin) {
 home.file = pkgs.lib.mkIf pkgs.stdenv.isDarwin {
   "Library/Application Support/numbat/config.toml".source = ./.config/numbat/config.toml;
 };
+
+# Create file instead of symlink.
+home.activation.copyOpenCodePlugin = lib.hm.dag.entryAfter ["writeBoundary"] ''
+  mkdir -p ${config.xdg.configHome}/opencode/plugin/
+  cp ${./.config/opencode/plugin/skills.ts} ${config.xdg.configHome}/opencode/plugin/skills.ts
+'';
