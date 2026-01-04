@@ -1,0 +1,4 @@
+% macos
+
+# Cleanup MacOS space disks
+npx mac-cleaner-cli
