@@ -87,3 +87,12 @@ paste -sd '<separator>' <file>
 
 $ separator: echo -e ',\n+\n-\n'
 $ file: ls -p *
+
+% shell, misc, gif
+; src: https://github.com/icholy/ttygif
+
+# Create terminal TTY recording.
+ttyrec <filename>
+
+# Convert terminal TTY recording to GIF.
+ttygif <filename>
