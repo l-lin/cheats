@@ -1,0 +1,7 @@
+% ctags
+
+# Generate ctags.
+ctags -R .
+
+# Generate ctags for ruby project.
+ctags -R --languages=Ruby .
