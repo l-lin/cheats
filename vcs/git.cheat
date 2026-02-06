@@ -112,6 +112,11 @@ $ new_worktree_path: echo -n "./.worktree/<sanitized_branch_name>"
 $ folder_name: echo -n "${PWD##*/}"
 $ worktree_path: git worktree list --- --column 1 --delimiter '\s\s+'
 
+$ git, stash
+
+# Stash staged and unstaged changes, and keep staged changes in working directory.
+git stash push -k
+
 $ git, maintenance
 
 # Start new git maintenance to accelerate git operations.
