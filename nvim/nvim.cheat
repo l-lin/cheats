@@ -92,6 +92,9 @@ windo diffthis
 # Print output of shell command.
 r!<command>
 
+# Get value of word under cursor
+lua =vim.fn.expand("<cword>")
+
 % nvim, lsp
 
 # Clean up lsp logs.
