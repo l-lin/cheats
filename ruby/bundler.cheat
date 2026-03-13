@@ -10,3 +10,5 @@ bundle update
 ; src: https://bundler.io/v2.5/man/bundle-gem.1.html
 bundle gem <gem_name> --bin --no-coc --no-ext --mit --test=minitest --ci=github --linter=rubocop
 
+# Config and install gem with openssl.
+bundle config --local build.<gem> --with-openssl-dir=$(brew --prefix openssl)
