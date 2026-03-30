@@ -1,0 +1,26 @@
+% java, snippet, hibernate
+
+# Debug hikari properties (update application.yml and run application).
+logging.level.com.zaxxer.hikari: DEBUG
+
+# Monitor hikari connection performance.
+@Configuration
+@Slf4j
+public class HikariTimingConfig {
+
+    public HikariTimingConfig(HikariDataSource ds) {
+        ds.setMetricsTrackerFactory((poolName, poolStats) -> new IMetricsTracker() {
+
+            @Override
+            public void recordConnectionAcquiredNanos(long elapsedAcquiredNanos) {
+                log.debug("[{}] Connection acquired", poolName);
+            }
+
+            @Override
+            public void recordConnectionUsageMillis(long elapsedBorrowedMillis) {
+                log.debug("[{}] Connection used for {} ms", poolName, elapsedBorrowedMillis);
+            }
+
+        });
+    }
+}
