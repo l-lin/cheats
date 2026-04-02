@@ -110,7 +110,7 @@ $ branch_name: git branch -a | grep 'remotes/origin' | sed 's~remotes/origin/~~'
 $ sanitized_branch_name: echo -e "<branch_name>" | sed 's~/~-~g'
 $ new_worktree_path: echo -n "./.worktree/<sanitized_branch_name>"
 $ folder_name: echo -n "${PWD##*/}"
-$ worktree_path: git worktree list --- --column 1 --delimiter '\s\s+'
+$ worktree_path: git worktree list | awk '{ print $1 }'
 
 % git, stash
 
