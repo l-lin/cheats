@@ -110,3 +110,6 @@ end
 
 set_border_on_lsp()
 
+# Check if nvim plugin/package is loaded.
+if package.loaded["<package_name>"] then
+end
