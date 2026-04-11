@@ -49,6 +49,19 @@ git rev-parse --abbrev-ref HEAD | copy"
 # Delete all local branches.
 git branch | grep -v "^\*" | grep -v main | grep -v master | xargs git branch -D
 
+# Check which files changed the most.
+; Files that are churned the most can be a signal there's something going on on those files.
+git log --format=format: --name-only --since="1 year ago" | sort | uniq -c | sort -nr | head -20
+
+# Check who built the project.
+git shortlog -sn --no-merges
+
+# Find where do bug cluster.
+git log -i -E --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c | sort -nr | head -20
+
+# Check if the project is accelerating or dying.
+git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
+
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ jira_id: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
