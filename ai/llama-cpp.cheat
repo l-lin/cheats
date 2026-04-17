@@ -1,0 +1,13 @@
+% ai, llama-cpp
+
+# Start llama-cpp server.
+llama-server -m <model> \
+  --port 11435 \
+  -ngl 99 \
+  -c 32768 \
+  -np 1 \
+  --jinja \
+  -ctk q8_0 \
+  -ctv q8_0
+
+$ model: ls $HOME/.config/ai/models/*.gguf | sed "s|$HOME|~|g"
