@@ -1,0 +1,6 @@
+% ai, mlx
+
+# Start MLX server.
+mlx_lm.server --model "<model>" --port 18080
+
+$ model: ls $HOME/.cache/huggingface/hub/ | rg 'models--' | awk -F'--' '{ print $2 "/" $3 }'
