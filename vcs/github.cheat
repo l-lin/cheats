@@ -24,7 +24,7 @@ gh pr view <pr_id> --web
 gh pr view --json url -q '.url' | cat
 
 # Create Github PR and copy PR url to clipboard.
-gh pr create -t "<pr_title>" && gh pr view --json url -q '.url' | copy
+gh pr create --base "<base_branch>" -t "<pr_title>" && gh pr view --json url -q '.url' | copy
 
 # Merge Github PR.
 gh pr merge --squash --delete-branch
@@ -34,7 +34,8 @@ gh pr checks --interval 30 --watch
 
 $ pr_id: gh pr list --- --column 1 --delimiter '\s+'
 $ pr_title: git show -s --format=%s $(git log --oneline <main_target_branch>..HEAD | head -1 | cut -d' ' -f1)
-$ main_target_branch: git branch | rg '(main|master)' -w | sed 's/*//' | sed 's/+//' | sed 's/\s//g'
+$ main_target_branch: git branch --format='%(refname:short)' | rg '(main|master)' -w
+$ base_branch: git branch --format='%(refname:short)' | grep -E '^(main|master)$'; git branch --format='%(refname:short)' | grep -Ev '^(main|master)$'
 
 % github, run
 
