@@ -62,6 +62,9 @@ git log -i -E --grep="fix|bug|broken" --name-only --format='' | sort | uniq -c |
 # Check if the project is accelerating or dying.
 git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
 
+# Rename branch.
+git branch -m <target_branch> <target_branch>
+
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ jira_id: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
