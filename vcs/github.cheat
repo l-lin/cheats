@@ -20,8 +20,8 @@ gh pr view --web
 # Open / Read / View Github PR in the browser.
 gh pr view <pr_id> --web
 
-# Get Github PR URL.
-gh pr view --json url -q '.url' | cat
+# Get / Copy / Yank Github PR URL.
+gh pr view --json url -q '.url' | cat | copy
 
 # Create Github PR and copy PR url to clipboard.
 gh pr create --base "<base_branch>" -t "<pr_title>" && gh pr view --json url -q '.url' | copy
