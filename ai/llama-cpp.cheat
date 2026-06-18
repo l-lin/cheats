@@ -1,13 +1,67 @@
 % ai, llama-cpp
 
 # Start llama-cpp server.
-llama-server -m <model> \
+; llama-cpp server for Qwen3.6-35B-A3B (MoE, 40 layers, GQA 2 KV heads,
+; head dim 256+256, native 256K context) tuned for a 48GB Apple Silicon Mac.
+;
+; -m <model>                  model GGUF file to load
+; --port 11435                HTTP port for the OpenAI-compatible server
+; -ngl 99                     offload all layers to the GPU (Metal); model has 40, 99 = "all"
+; -c 262144                   context size = model's native 256K max (no rope scaling needed)
+; -np 1                       single server slot; one shared KV cache, no memory split across requests
+; --jinja                     use the model's Jinja chat template (required for Qwen3 tool/think tags)
+; --cache-type-k q8_0         quantize K cache to 8-bit: ~halves KV memory (20GB f16 -> ~11GB) at 256K
+; --cache-type-v q8_0         quantize V cache to 8-bit (needs flash-attn); negligible quality loss,
+;                             keeps full 256K context within the default ~36GB Metal budget
+; --flash-attn on             flash attention: faster + lower attention memory; required for V quant
+; -b 4096                     logical batch size: tokens scheduled per decode step
+; -ub 2048                    physical batch size: bigger = faster prompt processing on Apple GPU
+; --reasoning on              enable Qwen3 thinking mode
+; --reasoning-budget 2048     cap thinking at 2048 tokens before forcing an answer
+; --temperature 0.6           Qwen3 official thinking-mode sampling preset
+; --top-p 0.95                Qwen3 official thinking-mode sampling preset
+; --top-k 20                  Qwen3 official thinking-mode sampling preset
+; --min-p 0.0                 Qwen3 official thinking-mode sampling preset (disabled)
+; --presence-penalty 0.0      Qwen3 default; raise toward 0.5-1.0 ONLY if you see repetition
+;                             (high values cause language mixing / quality drop)
+; --chat-template-kwargs      keep <think> blocks in the output instead of stripping them
+; --reasoning-budget-message  text injected at the cutoff when the thinking budget is exhausted
+; --mlock                     pin model in RAM so macOS can't compress/swap it (fits in 48GB) -> no latency spikes
+; -a qwen3.6                  API model alias; clients see "qwen3.6" instead of the full GGUF path
+; --cache-reuse 256           reuse KV across requests via prefix matching -> big speedup for multi-turn chat
+;
+; Situational flags (add if needed):
+; --prio 2                    raise process priority if other apps fight for the GPU
+; --api-key <key>             require auth (pair with --host 0.0.0.0 to expose beyond localhost)
+; --host 0.0.0.0              listen on all interfaces for LAN access (default: 127.0.0.1)
+; --metrics / --props / --slots  expose Prometheus metrics + runtime introspection
+; -cram 16384                 raise prompt-cache budget (MiB, default 8192) for many long conversations
+; --dry-multiplier 0.8        DRY sampling: smarter anti-repetition; use INSTEAD of presence-penalty if loops appear
+; -md <draft.gguf>            speculative decoding with a tiny Qwen3-0.6B draft (advanced; costs memory)
+;
+; Tip: give the GPU more headroom first -> sudo sysctl iogpu.wired_limit_mb=44000
+llama-server -m ~/.config/ai/models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf \
   --port 11435 \
+  -a qwen3.6 \
   -ngl 99 \
   -c 262144 \
   -np 1 \
+  --mlock \
+  --cache-reuse 256 \
   --jinja \
-  -ctk q8_0 \
-  -ctv q8_0
+  --cache-type-k q8_0 \
+  --cache-type-v q8_0 \
+  --flash-attn on \
+  -b 4096 \
+  -ub 2048 \
+  --reasoning-budget 2048 \
+  --temperature 0.6 \
+  --top-p 0.95 \
+  --top-k 20 \
+  --min-p 0.0 \
+  --presence-penalty 0.0 \
+  --reasoning on \
+  --chat-template-kwargs '{"preserve_thinking": true}' \
+  --reasoning-budget-message "reasoning budget consumed, time to answer now"
 
 $ model: ls $HOME/.config/ai/models/*.gguf | sed "s|$HOME|~|g"
