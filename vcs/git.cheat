@@ -65,6 +65,9 @@ git log --format='%ad' --date=format:'%Y-%m' | sort | uniq -c
 # Rename branch.
 git branch -m <target_branch> <target_branch>
 
+# Check why a file is gitignored.
+git check-ignore -v <file_path>
+
 $ target_branch: git for-each-ref --format='%(refname:short)' refs/heads/
 $ commit_type: echo -e 'feat\nfix\nchore\nrefactor\nci\nbuild'
 $ jira_id: echo -e "$(${PASTE_FROM_CLIPBOARD})\n"
