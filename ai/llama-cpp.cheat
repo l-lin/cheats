@@ -1,13 +1,17 @@
 % ai, llama-cpp
 
 # Start llama-cpp server.
-; llama-cpp server for Qwen3.6-35B-A3B (MoE, 40 layers, GQA 2 KV heads,
-; head dim 256+256, native 256K context) tuned for a 48GB Apple Silicon Mac.
+; Tuned for MoE models on a 48GB Apple Silicon Mac.
+; Qwen3.6-35B-A3B: Q4_K_M (~20 GB), 40 layers, 2 KV heads, head dim 256, native 256K ctx.
+; Ornith-1.0-35B: qwen35moe arch, also 3B active/token.
+;   Q6_K (~29 GB) is the sweet spot on 48GB: ~Q8 quality with room to spare; runs ctx_size=65536.
+;   Q8_0 (~37 GB) is tight (~11 GB for KV); Q5_K_M/Q4_K_M are smaller still. All ornith use 64K ctx.
 ;
 ; -m <model>                  model GGUF file to load
 ; --port 11435                HTTP port for the OpenAI-compatible server
 ; -ngl 99                     offload all layers to the GPU (Metal); model has 40, 99 = "all"
-; -c 262144                   context size = model's native 256K max (no rope scaling needed)
+; -c <ctx_size>               context size; auto-picked from model: 262144 for Qwen3.6 Q4_K_M,
+;                             65536 for Ornith (35B weights leave no room for 256K KV cache)
 ; -np 1                       single server slot; one shared KV cache, no memory split across requests
 ; --jinja                     use the model's Jinja chat template (required for Qwen3 tool/think tags)
 ; --cache-type-k q8_0         quantize K cache to 8-bit: ~halves KV memory (20GB f16 -> ~11GB) at 256K
@@ -26,7 +30,8 @@
 ;                             (high values cause language mixing / quality drop)
 ; --chat-template-kwargs      keep <think> blocks in the output instead of stripping them
 ; --reasoning-budget-message  text injected at the cutoff when the thinking budget is exhausted
-; --mlock                     pin model in RAM so macOS can't compress/swap it (fits in 48GB) -> no latency spikes
+; --mlock                     pin model in RAM so macOS can't compress/swap it -> no latency spikes
+;                             (may emit a warning on Q8_0/Q6_K where headroom is tight; harmless)
 ; -a qwen3.6                  API model alias; clients see "qwen3.6" instead of the full GGUF path
 ; --cache-reuse 256           reuse KV across requests via prefix matching -> big speedup for multi-turn chat
 ;
@@ -40,11 +45,11 @@
 ; -md <draft.gguf>            speculative decoding with a tiny Qwen3-0.6B draft (advanced; costs memory)
 ;
 ; Tip: give the GPU more headroom first -> sudo sysctl iogpu.wired_limit_mb=44000
-llama-server -m ~/.config/ai/models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf \
+llama-server -m <model> \
   --port 11435 \
-  -a qwen3.6 \
+  -a <model_name> \
   -ngl 99 \
-  -c 262144 \
+  -c <ctx_size> \
   -np 1 \
   --mlock \
   --cache-reuse 256 \
@@ -65,3 +70,5 @@ llama-server -m ~/.config/ai/models/Qwen3.6-35B-A3B-UD-Q4_K_M.gguf \
   --reasoning-budget-message "reasoning budget consumed, time to answer now"
 
 $ model: ls $HOME/.config/ai/models/*.gguf | sed "s|$HOME|~|g"
+$ ctx_size: echo "<model>" | sed 's|.*/||' | awk '{if ($0 ~ /^[Qq]wen/) print "262144"; else if ($0 ~ /^[Oo]rnith/) print "65536"; else print "8192"}'
+$ model_name: echo "<model>" | sed 's|.*/||; s|\.gguf$||' | awk '{if ($0 ~ /^[Qq]wen/) print "qwen3.6"; else if ($0 ~ /^[Oo]rnith/) print "ornith1.0"; else print $0}'
